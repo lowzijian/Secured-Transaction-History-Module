@@ -1,5 +1,6 @@
 import ListRefreshControl from "@/components/ListRefreshControl";
 import TransactionList from "@/components/transaction/TransactionList";
+import { COLORS, FONT_WEIGHT } from "@/constants/theme";
 import { mockTransactions } from "@/mocks/transaction.mock";
 import { Stack } from "expo-router";
 import { ScrollView } from "react-native";
@@ -16,10 +17,10 @@ const TransactionHistory = () => {
       <Stack.Screen
         options={{
           title: "Transaction History",
-          headerStyle: { backgroundColor: "#0000FF" },
-          headerTintColor: "#fff",
+          headerStyle: { backgroundColor: COLORS.primary },
+          headerTintColor: COLORS["text-white"],
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: FONT_WEIGHT.BOLD,
           },
         }}
       />
