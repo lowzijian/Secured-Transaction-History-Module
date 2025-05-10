@@ -4,6 +4,7 @@ import {
   maskTransactionAmount,
   formatTransactionDate,
 } from "@/utils/transaction.utils";
+import { Link } from "expo-router";
 import { FC } from "react";
 import {
   StyleProp,
@@ -16,7 +17,7 @@ import {
 } from "react-native";
 
 const TransactionItem: FC<Transaction> = (props) => {
-  const { amount, date, description, type } = props;
+  const { id, amount, date, description, type } = props;
 
   const amountStyle: StyleProp<TextStyle> = [
     styles.amount,
@@ -30,20 +31,33 @@ const TransactionItem: FC<Transaction> = (props) => {
     styles.icon,
     {
       backgroundColor:
-        amount > 0 ? COLORS["background-positive"] : COLORS["background-negative"],
+        amount > 0
+          ? COLORS["background-positive"]
+          : COLORS["background-negative"],
     },
   ];
 
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={iconStyle} />
-      <View style={styles.content}>
-        <Text style={styles.description}>{description}</Text>
-        <Text>{formatTransactionDate(date)}</Text>
-        <Text style={styles.type}>{type.toUpperCase()}</Text>
-      </View>
-      <Text style={amountStyle}>{maskTransactionAmount(amount)}</Text>
-    </TouchableOpacity>
+    <Link
+      href={{
+        pathname: "/detail",
+        params: {
+          id,
+        },
+      }}
+      push
+      asChild
+    >
+      <TouchableOpacity style={styles.container}>
+        <View style={iconStyle} />
+        <View style={styles.content}>
+          <Text style={styles.description}>{description}</Text>
+          <Text>{formatTransactionDate(date)}</Text>
+          <Text style={styles.type}>{type.toUpperCase()}</Text>
+        </View>
+        <Text style={amountStyle}>{maskTransactionAmount(amount)}</Text>
+      </TouchableOpacity>
+    </Link>
   );
 };
 
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 20,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
 });
 
