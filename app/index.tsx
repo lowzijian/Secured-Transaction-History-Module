@@ -1,9 +1,16 @@
+import ListRefreshControl from "@/components/ListRefreshControl";
 import TransactionList from "@/components/transaction/TransactionList";
 import { mockTransactions } from "@/mocks/transaction.mock";
 import { Stack } from "expo-router";
 import { ScrollView } from "react-native";
 
 const TransactionHistory = () => {
+  // TODO: Implement the onRefresh function
+  const onRefetch = () => {
+    // Logic to refresh the transaction history
+    console.log("Refreshing transaction history...");
+  };
+
   return (
     <>
       <Stack.Screen
@@ -16,7 +23,7 @@ const TransactionHistory = () => {
           },
         }}
       />
-      <ScrollView>
+      <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
         <TransactionList transactions={mockTransactions} />
       </ScrollView>
     </>
