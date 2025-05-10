@@ -1,15 +1,26 @@
-import { Text, View } from "react-native";
+import TransactionList from "@/components/transaction/TransactionList";
+import { mockTransactions } from "@/mocks/transaction.mock";
+import { Stack } from "expo-router";
+import { ScrollView } from "react-native";
 
-export default function Index() {
+const TransactionHistory = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <>
+      <Stack.Screen
+        options={{
+          title: "Transaction History",
+          headerStyle: { backgroundColor: "#0000FF" },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      />
+      <ScrollView>
+        <TransactionList transactions={mockTransactions} />
+      </ScrollView>
+    </>
   );
-}
+};
+
+export default TransactionHistory;
