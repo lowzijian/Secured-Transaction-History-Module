@@ -1,11 +1,21 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import IconButton from "@/components/IconButton";
+import { useAuth } from "@/hooks/useAuth";
+import LoginButton from "@/components/auth/LoginButton";
 
 const Login = () => {
+  const { authenticate } = useAuth();
+
+  const handleLogin = async () => {
+    const success = await authenticate();
+    if (success) {
+      router.replace("/transaction");
+    }
+  };
+
   return (
     <LinearGradient
       colors={[COLORS.primary, COLORS.secondary]} // top to bottom
@@ -14,19 +24,8 @@ const Login = () => {
       style={styles.background}
     >
       <Text style={styles.logo}>EXPO</Text>
-      <View style={styles.buttonsContainer}>
-        <IconButton
-          name="fingerprint"
-          size={40}
-          color={COLORS["text-white"]}
-          onPress={() => {}}
-        />
-        <IconButton
-          name="face-recognition"
-          size={40}
-          color={COLORS["text-white"]}
-          onPress={() => {}}
-        />
+      <View style={styles.buttonContainer}>
+        <LoginButton onPress={handleLogin} />
       </View>
 
       <Stack.Screen options={{ headerShown: false }} />
@@ -47,12 +46,8 @@ const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.BOLD,
     fontSize: 48,
   },
-  buttonsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+  buttonContainer: {
     marginTop: SPACING.S_4,
-    gap: SPACING.S_3,
   },
 });
 
