@@ -39,7 +39,7 @@ const TransactionHistory = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <View style={styles.headerRightContainer}>
+            <View>
               <IconButton
                 onPress={() => setIsAmountMasked((prev) => !prev)}
                 name={isAmountMasked ? "eye" : "eye-off"}
@@ -56,11 +56,5 @@ const TransactionHistory = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  headerRightContainer: {
-    flex: 1,
-  },
-});
 
 export default TransactionHistory;
