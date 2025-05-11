@@ -1,4 +1,4 @@
-export const SPACING: Record<string, number> = {
+export const SPACING = {
   S_0: 4,
   S_1: 8,
   S_2: 16,
@@ -14,7 +14,7 @@ export const FONT_WEIGHT = {
   BOLD: "700",
 } as const;
 
-export const COLORS: Record<string, string> = {
+export const COLORS = {
   primary: "#0000FF",
   secondary: "#1DE9B6",
   "text-white": "#FFFFFF",
@@ -25,4 +25,4 @@ export const COLORS: Record<string, string> = {
   "background-positive": "#D1FAE5",
   "background-negative": "#FEE2E2",
   "border-primary": "#A9A9A9",
-};
+} as const;
