@@ -2,12 +2,15 @@ import TransactionDetailBody from "@/components/transaction/TransactionDetailBod
 import TransactionDetailErrorState from "@/components/transaction/TransactionDetailErrorState";
 import TransactionDetailHeader from "@/components/transaction/TransactionDetailHeader";
 import TransactionDetailLoadingSkeleton from "@/components/transaction/TransactionDetailLoadingSkeleton";
-import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
+import { SPACING } from "@/constants/theme";
 import useTransactionHistoryByIdQuery from "@/hooks/useTransactionHistoryByIdQuery";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 const TransactionDetail = () => {
+  const navigation = useNavigation();
+
   const params = useLocalSearchParams<{ id: string }>();
 
   const {
@@ -15,6 +18,12 @@ const TransactionDetail = () => {
     isError,
     isFetching,
   } = useTransactionHistoryByIdQuery(params.id);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Transaction Detail",
+    });
+  }, [navigation]);
 
   if (isFetching) {
     return <TransactionDetailLoadingSkeleton />;
@@ -25,28 +34,16 @@ const TransactionDetail = () => {
   }
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          title: "Transaction Detail",
-          headerStyle: { backgroundColor: COLORS.primary },
-          headerTintColor: COLORS["text-white"],
-          headerTitleStyle: {
-            fontWeight: FONT_WEIGHT.BOLD,
-          },
-        }}
+    <ScrollView contentContainerStyle={styles.contentContainer}>
+      <TransactionDetailHeader
+        amount={transaction.amount}
+        date={transaction.date}
       />
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <TransactionDetailHeader
-          amount={transaction.amount}
-          date={transaction.date}
-        />
-        <TransactionDetailBody
-          description={transaction.description}
-          type={transaction.type}
-        />
-      </ScrollView>
-    </>
+      <TransactionDetailBody
+        description={transaction.description}
+        type={transaction.type}
+      />
+    </ScrollView>
   );
 };
 

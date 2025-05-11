@@ -2,13 +2,21 @@ import ListRefreshControl from "@/components/ListRefreshControl";
 import TransactionErrorState from "@/components/transaction/TransactionErrorState";
 import TransactionList from "@/components/transaction/TransactionList";
 import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
-import { COLORS, FONT_WEIGHT } from "@/constants/theme";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
-import { Stack } from "expo-router";
+import { useNavigation } from "expo-router";
+import { useEffect } from "react";
 import { ScrollView } from "react-native";
 
 const TransactionHistory = () => {
+  const navigation = useNavigation();
+
   const { data, isFetching, isError, refetch } = useTransactionHistoriesQuery();
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Transaction History",
+    });
+  }, [navigation]);
 
   const onRefetch = () => {
     refetch();
@@ -23,21 +31,9 @@ const TransactionHistory = () => {
   }
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          title: "Transaction History",
-          headerStyle: { backgroundColor: COLORS.primary },
-          headerTintColor: COLORS["text-white"],
-          headerTitleStyle: {
-            fontWeight: FONT_WEIGHT.BOLD,
-          },
-        }}
-      />
-      <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
-        <TransactionList transactions={data} />
-      </ScrollView>
-    </>
+    <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
+      <TransactionList transactions={data} />
+    </ScrollView>
   );
 };
 
