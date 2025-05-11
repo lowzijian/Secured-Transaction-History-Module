@@ -5,9 +5,9 @@ import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoad
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { COLORS } from "@/constants/theme";
+import IconButton from "@/components/IconButton";
 
 const TransactionHistory = () => {
   const navigation = useNavigation();
@@ -39,15 +39,14 @@ const TransactionHistory = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <TouchableOpacity
-              onPress={() => setIsAmountMasked((prev) => !prev)}
-            >
-              <Icon
+            <View style={styles.headerRightContainer}>
+              <IconButton
+                onPress={() => setIsAmountMasked((prev) => !prev)}
                 name={isAmountMasked ? "eye" : "eye-off"}
                 size={24}
                 color={COLORS["text-white"]}
               />
-            </TouchableOpacity>
+            </View>
           ),
         }}
       />
@@ -57,5 +56,11 @@ const TransactionHistory = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  headerRightContainer: {
+    flex: 1,
+  },
+});
 
 export default TransactionHistory;
