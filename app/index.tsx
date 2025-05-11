@@ -8,15 +8,13 @@ import { Stack } from "expo-router";
 import { ScrollView } from "react-native";
 
 const TransactionHistory = () => {
-  const { data, isLoading, isError } = useTransactionHistoriesQuery();
+  const { data, isFetching, isError, refetch } = useTransactionHistoriesQuery();
 
-  // TODO: Implement the onRefresh function
   const onRefetch = () => {
-    // Logic to refresh the transaction history
-    console.log("Refreshing transaction history...");
+    refetch();
   };
 
-  if (isLoading) {
+  if (isFetching) {
     return <TransactionLoadingSkeleton />;
   }
 
