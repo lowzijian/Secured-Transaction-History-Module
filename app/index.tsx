@@ -1,13 +1,13 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { router, Stack } from "expo-router";
+import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useAuth } from "@/hooks/useAuth";
+import useAuthContext from "@/hooks/useAuthContext";
 import LoginButton from "@/components/auth/LoginButton";
 
 const Login = () => {
-  const { authenticate } = useAuth();
+  const { authenticate } = useAuthContext();
 
   const handleLogin = async () => {
     const success = await authenticate();
@@ -27,8 +27,6 @@ const Login = () => {
       <View style={styles.buttonContainer}>
         <LoginButton onPress={handleLogin} />
       </View>
-
-      <Stack.Screen options={{ headerShown: false }} />
     </LinearGradient>
   );
 };
