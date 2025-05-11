@@ -16,6 +16,7 @@ export const FONT_WEIGHT = {
 
 export const COLORS: Record<string, string> = {
   primary: "#0000FF",
+  secondary: "#1DE9B6",
   "text-white": "#FFFFFF",
   "content-positive": "#34D399",
   "content-negative": "#EF4444",
