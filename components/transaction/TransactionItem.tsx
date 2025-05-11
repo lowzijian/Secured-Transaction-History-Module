@@ -3,6 +3,7 @@ import { Transaction } from "@/models/transaction.model";
 import {
   maskTransactionAmount,
   formatTransactionDate,
+  formatTransactionAmount,
 } from "@/utils/transaction.utils";
 import { Link } from "expo-router";
 import { FC } from "react";
@@ -16,8 +17,12 @@ import {
   ViewStyle,
 } from "react-native";
 
-const TransactionItem: FC<Transaction> = (props) => {
-  const { id, amount, date, description, type } = props;
+interface TransactionItemProps extends Transaction {
+  isAmountMasked?: boolean;
+}
+
+const TransactionItem: FC<TransactionItemProps> = (props) => {
+  const { id, amount, date, description, type, isAmountMasked } = props;
 
   const amountStyle: StyleProp<TextStyle> = [
     styles.amount,
@@ -55,7 +60,11 @@ const TransactionItem: FC<Transaction> = (props) => {
           <Text>{formatTransactionDate(date)}</Text>
           <Text style={styles.type}>{type.toUpperCase()}</Text>
         </View>
-        <Text style={amountStyle}>{maskTransactionAmount(amount)}</Text>
+        <Text style={amountStyle}>
+          {isAmountMasked
+            ? maskTransactionAmount(amount)
+            : formatTransactionAmount(amount)}
+        </Text>
       </TouchableOpacity>
     </Link>
   );

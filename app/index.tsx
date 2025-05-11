@@ -3,12 +3,16 @@ import TransactionErrorState from "@/components/transaction/TransactionErrorStat
 import TransactionList from "@/components/transaction/TransactionList";
 import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
-import { useNavigation } from "expo-router";
-import { useEffect } from "react";
-import { ScrollView } from "react-native";
+import { Stack, useNavigation } from "expo-router";
+import { useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity } from "react-native";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { COLORS } from "@/constants/theme";
 
 const TransactionHistory = () => {
   const navigation = useNavigation();
+
+  const [isAmountMasked, setIsAmountMasked] = useState(true);
 
   const { data, isFetching, isError, refetch } = useTransactionHistoriesQuery();
 
@@ -31,9 +35,26 @@ const TransactionHistory = () => {
   }
 
   return (
-    <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
-      <TransactionList transactions={data} />
-    </ScrollView>
+    <>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => setIsAmountMasked((prev) => !prev)}
+            >
+              <Icon
+                name={isAmountMasked ? "eye-off" : "eye"}
+                size={24}
+                color={COLORS["text-white"]}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
+        <TransactionList transactions={data} isAmountMasked={isAmountMasked} />
+      </ScrollView>
+    </>
   );
 };
 

@@ -6,15 +6,20 @@ import TransactionItem from "./TransactionItem";
 
 interface TransactionListProps {
   transactions: Transaction[];
+  isAmountMasked: boolean;
 }
 
 const TransactionList: FC<TransactionListProps> = (props) => {
-  const { transactions } = props;
+  const { transactions, isAmountMasked } = props;
 
   return (
     <View style={styles.container}>
       {transactions.map((transaction) => (
-        <TransactionItem key={transaction.id} {...transaction} />
+        <TransactionItem
+          key={transaction.id}
+          {...transaction}
+          isAmountMasked={isAmountMasked}
+        />
       ))}
     </View>
   );
