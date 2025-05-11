@@ -1,19 +1,27 @@
 import TransactionDetailBody from "@/components/transaction/TransactionDetailBody";
+import TransactionDetailErrorState from "@/components/transaction/TransactionDetailErrorState";
 import TransactionDetailHeader from "@/components/transaction/TransactionDetailHeader";
+import TransactionDetailLoadingSkeleton from "@/components/transaction/TransactionDetailLoadingSkeleton";
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { mockTransactions } from "@/mocks/transaction.mock";
+import useTransactionHistoryByIdQuery from "@/hooks/useTransactionHistoryByIdQuery";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { ScrollView, StyleSheet } from "react-native";
 
 const TransactionDetail = () => {
   const params = useLocalSearchParams<{ id: string }>();
 
-  // TODO: retrieve transaction from mock API
-  const transaction = mockTransactions.find((item) => item.id === params.id);
+  const {
+    data: transaction,
+    isError,
+    isFetching,
+  } = useTransactionHistoryByIdQuery(params.id);
 
-  // TODO: handle empty / error state
-  if (!transaction) {
-    return null;
+  if (isFetching) {
+    return <TransactionDetailLoadingSkeleton />;
+  }
+
+  if (!transaction || isError) {
+    return <TransactionDetailErrorState />;
   }
 
   return (
