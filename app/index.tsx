@@ -43,7 +43,7 @@ const TransactionHistory = () => {
               onPress={() => setIsAmountMasked((prev) => !prev)}
             >
               <Icon
-                name={isAmountMasked ? "eye-off" : "eye"}
+                name={isAmountMasked ? "eye" : "eye-off"}
                 size={24}
                 color={COLORS["text-white"]}
               />
