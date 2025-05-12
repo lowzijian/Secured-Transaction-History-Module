@@ -1,8 +1,9 @@
-import { mockTransactions } from "@/mocks/transaction.mock";
+import { mockTransactions, mockTransactions2 } from "@/mocks/transaction.mock";
 import { ApiResponse } from "@/models/api.model";
 import { Transaction } from "@/models/transaction.model";
 
 export const fetchTransactionHistories = async (
+  isNextFetch = false,
   isError = false,
   duration = 3000
 ) => {
@@ -12,7 +13,9 @@ export const fetchTransactionHistories = async (
         code: 200,
         status: "success",
         description: "Transactions fetched successfully",
-        data: mockTransactions,
+        data: isNextFetch
+          ? [...mockTransactions2, ...mockTransactions]
+          : mockTransactions,
       };
 
       const errorResponse: ApiResponse<null> = {

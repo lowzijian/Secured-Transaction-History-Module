@@ -4,18 +4,27 @@ import TransactionList from "@/components/transaction/TransactionList";
 import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack } from "expo-router";
-import { useState } from "react";
-import { ScrollView, View } from "react-native";
-import { COLORS } from "@/constants/theme";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { COLORS, SPACING } from "@/constants/theme";
 import IconButton from "@/components/IconButton";
 import useAuthContext from "@/hooks/useAuthContext";
 
 const TransactionHistoryScreen = () => {
   const { onBiometricAuthenticate } = useAuthContext();
 
+  const [isNextFetch, setIsNextFetch] = useState(false);
   const [isAmountMasked, setIsAmountMasked] = useState(true);
 
-  const { data, isFetching, isError, refetch } = useTransactionHistoriesQuery();
+  const { data, isLoading, isError, refetch, isRefetching } =
+    useTransactionHistoriesQuery(isNextFetch);
+
+  // mimic new paginated data being fetched after pull to refresh
+  useEffect(() => {
+    if (data) {
+      setIsNextFetch(true);
+    }
+  }, [data]);
 
   const onRefetch = () => {
     refetch();
@@ -29,7 +38,7 @@ const TransactionHistoryScreen = () => {
     setIsAmountMasked((prev) => !prev);
   };
 
-  if (isFetching) {
+  if (isLoading) {
     return <TransactionLoadingSkeleton />;
   }
 
@@ -53,11 +62,23 @@ const TransactionHistoryScreen = () => {
           ),
         }}
       />
-      <ScrollView refreshControl={<ListRefreshControl onRefresh={onRefetch} />}>
+      <ScrollView
+        refreshControl={<ListRefreshControl onRefresh={onRefetch} />}
+        contentContainerStyle={styles.contentContainer}
+      >
+        {isRefetching && <Text>Loading...</Text>}
         <TransactionList transactions={data} isAmountMasked={isAmountMasked} />
       </ScrollView>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    backgroundColor: COLORS["background-white"],
+    paddingHorizontal: SPACING.S_2,
+    paddingVertical: SPACING.S_3,
+  },
+});
 
 export default TransactionHistoryScreen;
