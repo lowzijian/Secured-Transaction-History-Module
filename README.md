@@ -65,6 +65,10 @@ _Make sure your simulator or device supports biometric authentication._
 
 ## What Next's
 
+ **WIP**
+- 👷 Investigate transaction list not working on Android ⚠️ , might consider changing to adopt SectionList
+- 👷 Retest happy flow in Android 🤖
+
 #### UI
 - [ ] Loading Skeleton
 
