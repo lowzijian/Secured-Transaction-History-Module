@@ -2,7 +2,7 @@ import TransactionDetailBody from "@/components/transaction/TransactionDetailBod
 import TransactionDetailErrorState from "@/components/transaction/TransactionDetailErrorState";
 import TransactionDetailHeader from "@/components/transaction/TransactionDetailHeader";
 import TransactionDetailLoadingSkeleton from "@/components/transaction/TransactionDetailLoadingSkeleton";
-import { SPACING } from "@/constants/theme";
+import { COLORS, SPACING } from "@/constants/theme";
 import useTransactionHistoryByIdQuery from "@/hooks/useTransactionHistoryByIdQuery";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect } from "react";
@@ -38,11 +38,10 @@ const TransactionDetailScreen = () => {
       <TransactionDetailHeader
         amount={transaction.amount}
         date={transaction.date}
+        category={transaction.category}
+        merchantLogo={transaction.merchantLogo}
       />
-      <TransactionDetailBody
-        description={transaction.description}
-        type={transaction.type}
-      />
+      <TransactionDetailBody {...transaction} />
     </ScrollView>
   );
 };
@@ -50,6 +49,8 @@ const TransactionDetailScreen = () => {
 const styles = StyleSheet.create({
   contentContainer: {
     padding: SPACING.S_2,
+    backgroundColor: COLORS["background-white"],
+    flex: 1,
   },
 });
 
