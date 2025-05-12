@@ -11,7 +11,7 @@ interface TransactionCategoryIconProps {
 }
 
 const TransactionCategoryIcon: FC<TransactionCategoryIconProps> = (props) => {
-  const { category, size = 24 } = props;
+  const { category, size = 40 } = props;
 
   const names: Record<
     TransactionCategory,
@@ -33,18 +33,27 @@ const TransactionCategoryIcon: FC<TransactionCategoryIconProps> = (props) => {
   };
 
   return (
-    <View style={styles.icon}>
-      <Icon name={names[category]} size={size} color={COLORS["primary"]} />
+    <View
+      style={[
+        styles.icon,
+        {
+          height: size,
+          width: size,
+          borderRadius: size / 2,
+        },
+      ]}
+    >
+      <Icon
+        name={names[category]}
+        size={size * 0.6}
+        color={COLORS["primary"]}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   icon: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    alignSelf: "center",
     backgroundColor: COLORS["background-primary"],
     justifyContent: "center",
     alignItems: "center",
