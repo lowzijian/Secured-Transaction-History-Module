@@ -16,7 +16,7 @@ const TransactionHistoryScreen = () => {
   const [isNextFetch, setIsNextFetch] = useState(false);
   const [isAmountMasked, setIsAmountMasked] = useState(true);
 
-  const { data, isLoading, isError, refetch, isRefetching } =
+  const { data, isLoading, isError, refetch, isFetching } =
     useTransactionHistoriesQuery(isNextFetch);
 
   // mimic new paginated data being fetched after pull to refresh
@@ -66,7 +66,7 @@ const TransactionHistoryScreen = () => {
         refreshControl={<ListRefreshControl onRefresh={onRefetch} />}
         contentContainerStyle={styles.contentContainer}
       >
-        {isRefetching && <Text>Loading...</Text>}
+        {isFetching && !isLoading && <Text style={styles.loadingText}>Loading...</Text>}
         <TransactionList transactions={data} isAmountMasked={isAmountMasked} />
       </ScrollView>
     </>
@@ -79,6 +79,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.S_2,
     paddingVertical: SPACING.S_3,
   },
+  loadingText: {
+    color: COLORS["content-secondary"],
+    textAlign: "center",
+    paddingVertical: SPACING.S_2,
+  }
 });
 
 export default TransactionHistoryScreen;
