@@ -11,7 +11,7 @@ import IconButton from "@/components/IconButton";
 import useAuthContext from "@/hooks/useAuthContext";
 
 const TransactionHistoryScreen = () => {
-  const { authenticate } = useAuthContext();
+  const { onBiometricAuthenticate } = useAuthContext();
 
   const [isAmountMasked, setIsAmountMasked] = useState(true);
 
@@ -23,7 +23,7 @@ const TransactionHistoryScreen = () => {
 
   const onToggleMask = async () => {
     if (isAmountMasked) {
-      const isVerified = await authenticate();
+      const isVerified = await onBiometricAuthenticate();
       if (!isVerified) return;
     }
     setIsAmountMasked((prev) => !prev);

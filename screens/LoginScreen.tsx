@@ -9,14 +9,11 @@ import useAuthBiometricSupport from "@/hooks/useAuthBiometricSupport";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const LoginScreen = () => {
-  const { authenticate } = useAuthContext();
+  const { onSignIn } = useAuthContext();
   const { isBiometricSupported, supportedTypes } = useAuthBiometricSupport();
 
   const handleLogin = async () => {
-    const success = await authenticate();
-    if (success) {
-      router.replace("/(transaction)");
-    }
+    await onSignIn();
   };
 
   const renderBiometricSupportedTypeIndicator = (type: string) => {
