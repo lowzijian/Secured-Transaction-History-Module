@@ -1,9 +1,11 @@
+import IconButton from "@/components/IconButton";
 import { COLORS, FONT_WEIGHT } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
 import { Redirect, Stack } from "expo-router";
+import { View } from "react-native";
 
 export default function ProtectedLayout() {
-  const { isLoggedIn, isReady } = useAuthContext();
+  const { isLoggedIn, isReady, onSignOut } = useAuthContext();
 
   if (!isReady) {
     // TODO: Add a loading screen
@@ -28,6 +30,16 @@ export default function ProtectedLayout() {
         name="index"
         options={{
           title: "Transaction History",
+          headerLeft: () => (
+            <View style={{ width: 24, height: 24 }}>
+              <IconButton
+                onPress={onSignOut}
+                name="logout-variant"
+                size={24}
+                color={COLORS["text-white"]}
+              />
+            </View>
+          ),
         }}
       />
       <Stack.Screen
