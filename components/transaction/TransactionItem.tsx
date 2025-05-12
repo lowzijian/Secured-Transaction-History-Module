@@ -28,8 +28,7 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
   const amountStyle: StyleProp<TextStyle> = [
     styles.amount,
     {
-      color:
-        amount > 0 ? COLORS["content-positive"] : COLORS["text-primary"],
+      color: amount > 0 ? COLORS["content-positive"] : COLORS["text-primary"],
     },
   ];
 
@@ -48,8 +47,9 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
         <TransactionItemIcon category={category} />
         <View style={styles.content}>
           <Text style={styles.description}>{description}</Text>
-          <Text>{formatTransactionDate(date)}</Text>
-          <Text style={styles.type}>{type.toUpperCase()}</Text>
+          <Text style={styles.caption}>
+            {formatTransactionDate(date)} | {type.toUpperCase()}
+          </Text>
         </View>
         <Text style={amountStyle}>
           {isAmountMasked
@@ -63,9 +63,9 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: SPACING.S_2,
     flexDirection: "row",
     gap: SPACING.S_2,
+    paddingVertical: SPACING.S_2,
   },
   content: {
     flexGrow: 1,
@@ -74,19 +74,13 @@ const styles = StyleSheet.create({
     fontWeight: FONT_WEIGHT.MEDIUM,
     fontSize: 16,
   },
-  type: {
+  caption: {
     fontSize: 14,
     color: COLORS["content-secondary"],
   },
   amount: {
     fontSize: 16,
     fontWeight: FONT_WEIGHT.SEMIBOLD,
-  },
-  icon: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    alignSelf: "center",
   },
 });
 
