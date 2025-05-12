@@ -1,3 +1,7 @@
+import { DATE_FORMAT } from "./date.util";
+import { format } from "date-fns";
+import { ValueOf } from "./types";
+
 /**
  * Formats a transaction amount into a localized currency string.
  *
@@ -50,13 +54,11 @@ export const maskTransactionAmount = (amount: number): string => {
  * formatTransactionDate("2024-11-15T00:00:00Z");
  * // Returns: "01 Jan 2023"
  */
-export const formatTransactionDate = (date: string): string => {
-  const dateObj = new Date(date);
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  };
-
-  return new Intl.DateTimeFormat("ms-MY", options).format(dateObj);
+export const formatTransactionDate = (
+  date: string,
+  _format: ValueOf<
+    typeof DATE_FORMAT
+  > = DATE_FORMAT.SHORT_MONTH_DAY_YEAR_WITH_COMMA
+): string => {
+  return format(new Date(date), _format);
 };

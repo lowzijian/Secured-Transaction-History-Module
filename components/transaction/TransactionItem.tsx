@@ -16,6 +16,7 @@ import {
   View,
 } from "react-native";
 import TransactionItemIcon from "./TransactionItemIcon";
+import { DATE_FORMAT } from "@/utils/date.util";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;
