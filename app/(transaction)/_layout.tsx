@@ -34,6 +34,7 @@ export default function ProtectedLayout() {
         name="[id]"
         options={{
           title: "Transaction Detail",
+          headerBackButtonDisplayMode: "minimal",
         }}
       />
     </Stack>
