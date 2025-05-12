@@ -8,9 +8,12 @@ import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { COLORS } from "@/constants/theme";
 import IconButton from "@/components/IconButton";
+import useAuthContext from "@/hooks/useAuthContext";
 
 const TransactionHistoryScreen = () => {
   const navigation = useNavigation();
+
+  const { authenticate } = useAuthContext();
 
   const [isAmountMasked, setIsAmountMasked] = useState(true);
 
@@ -24,6 +27,14 @@ const TransactionHistoryScreen = () => {
 
   const onRefetch = () => {
     refetch();
+  };
+
+  const onToggleMask = async () => {
+    if (isAmountMasked) {
+      const isVerified = await authenticate();
+      if (!isVerified) return;
+    }
+    setIsAmountMasked((prev) => !prev);
   };
 
   if (isFetching) {
@@ -41,7 +52,7 @@ const TransactionHistoryScreen = () => {
           headerRight: () => (
             <View>
               <IconButton
-                onPress={() => setIsAmountMasked((prev) => !prev)}
+                onPress={onToggleMask}
                 name={isAmountMasked ? "eye" : "eye-off"}
                 size={24}
                 color={COLORS["text-white"]}
