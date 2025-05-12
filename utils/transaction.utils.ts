@@ -52,8 +52,8 @@ export const maskTransactionAmount = (amount: number): string => {
  * @returns A formatted date string (e.g., "01 Jan 2023")
  *
  * @example
- * formatTransactionDate("2024-11-15T00:00:00Z");
- * // Returns: "01 Jan 2023"
+ * formatTransactionDate("2024-01-01T00:00:00Z");
+ * // Returns: "Jan 01, 2024"
  */
 export const formatTransactionDate = (
   date: string,
@@ -64,6 +64,35 @@ export const formatTransactionDate = (
   return format(new Date(date), _format);
 };
 
+/**
+ * Groups transactions by month and calculates the total amount for each month.
+ *
+ * @param transactions - an array of transaction objects
+ * @returns An object where each key is a month and the value is an object containing the total amount and an array of transactions for that month
+ *
+ * @example
+ * groupedTransactionByMonth([
+ *   { id: 1, date: "2024-01-01T00:00:00Z", amount: 100 },
+ *   { id: 2, date: "2024-01-15T00:00:00Z", amount: 200 },
+ *   { id: 3, date: "2024-02-01T00:00:00Z", amount: 300 },
+ * ]);
+ * // Returns:
+ * // {
+ * //   "January 2024": {
+ * //     total: 300,
+ * //     transactions: [
+ * //       { id: 1, date: "2024-01-01T00:00:00Z", amount: 100 },
+ * //       { id: 2, date: "2024-01-15T00:00:00", amount: 200 }
+ * //     ]
+ * //   },
+ * //   "February 2024": {
+ * //     total: 300,
+ * //     transactions: [
+ * //       { id: 3, date: "2024-02-01T00:00:00Z", amount: 300 }
+ * //     ]
+ * //   }
+ * // }
+ */
 export const groupedTransactionByMonth = (transactions: Transaction[]) => {
   return transactions
     .map((txn) => ({
