@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   description: {
-    fontWeight: FONT_WEIGHT.BOLD,
+    fontWeight: FONT_WEIGHT.MEDIUM,
     fontSize: 16,
   },
   type: {
