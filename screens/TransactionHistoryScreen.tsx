@@ -3,27 +3,19 @@ import TransactionErrorState from "@/components/transaction/TransactionErrorStat
 import TransactionList from "@/components/transaction/TransactionList";
 import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
-import { Stack, useNavigation } from "expo-router";
-import { useEffect, useState } from "react";
+import { Stack } from "expo-router";
+import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { COLORS } from "@/constants/theme";
 import IconButton from "@/components/IconButton";
 import useAuthContext from "@/hooks/useAuthContext";
 
 const TransactionHistoryScreen = () => {
-  const navigation = useNavigation();
-
   const { authenticate } = useAuthContext();
 
   const [isAmountMasked, setIsAmountMasked] = useState(true);
 
   const { data, isFetching, isError, refetch } = useTransactionHistoriesQuery();
-
-  useEffect(() => {
-    navigation.setOptions({
-      title: "Transaction History",
-    });
-  }, [navigation]);
 
   const onRefetch = () => {
     refetch();
