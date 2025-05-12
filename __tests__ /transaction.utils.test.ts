@@ -1,5 +1,7 @@
+import { Transaction } from "@/models/transaction.model";
 import {
   formatTransactionAmount,
+  groupedTransactionByMonth,
   maskTransactionAmount,
 } from "@/utils/transaction.utils";
 
@@ -40,5 +42,64 @@ describe("maskTransactionAmount", () => {
     ["mask zero to MYR currency without plus sign", 0, "RM*.**"],
   ])("%s", (_, amount, expected) => {
     expect(maskTransactionAmount(amount)).toBe(expected);
+  });
+});
+
+// groupedTransactionByMonth
+describe("groupedTransactionByMonth", () => {
+  it("groups transactions by month with correct totals", () => {
+    const mockTransactions = [
+      {
+        id: "1",
+        amount: -100,
+        date: "2025-05-01T10:00:00Z",
+      },
+      {
+        id: "2",
+        amount: -200,
+        date: "2025-05-12T15:00:00Z",
+      },
+      {
+        id: "3",
+        amount: 1000,
+        date: "2025-04-15T08:00:00Z",
+      },
+    ] as Transaction[];
+
+    const expectedResult = {
+      "May 2025": {
+        total: -300,
+        transactions: [
+          {
+            id: "1",
+            amount: -100,
+            date: "2025-05-01T10:00:00Z",
+          },
+          {
+            id: "2",
+            amount: -200,
+            date: "2025-05-12T15:00:00Z",
+          },
+        ],
+      },
+      "April 2025": {
+        total: 1000,
+        transactions: [
+          {
+            id: "3",
+            amount: 1000,
+            date: "2025-04-15T08:00:00Z",
+          },
+        ],
+      },
+    };
+
+    const result = groupedTransactionByMonth(mockTransactions as any);
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  it("returns empty object when input is empty", () => {
+    expect(groupedTransactionByMonth([])).toEqual({});
   });
 });
