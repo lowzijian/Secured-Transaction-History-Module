@@ -51,7 +51,7 @@ const TransactionHistoryScreen = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <View>
+            <View style={{ width: 24, height: 24 }}>
               <IconButton
                 onPress={onToggleMask}
                 name={isAmountMasked ? "eye" : "eye-off"}
