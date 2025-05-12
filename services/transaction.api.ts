@@ -51,7 +51,7 @@ export const fetchTransactionHistoryById = async (
         return reject(errorResponse);
       }
 
-      const transaction = mockTransactions.find((item) => item.id === id);
+      const transaction = [...mockTransactions2, ...mockTransactions].find((item) => item.id === id);
 
       if (!transaction) {
         return reject({
