@@ -1,7 +1,7 @@
 import AuthContextProvider from "@/context/AuthProvider";
 import useAppState from "@/hooks/useAppState";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 
 export default function RootLayout() {
   const queryClient = new QueryClient({
@@ -13,7 +13,7 @@ export default function RootLayout() {
   return (
     <AuthContextProvider>
       <QueryClientProvider client={queryClient}>
-        <Stack screenOptions={{ headerShown: false }} />
+        <Slot />
       </QueryClientProvider>
     </AuthContextProvider>
   );

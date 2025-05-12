@@ -15,7 +15,7 @@ const Login = () => {
   const handleLogin = async () => {
     const success = await authenticate();
     if (success) {
-      router.replace("/transaction");
+      router.replace("/(transaction)");
     }
   };
 

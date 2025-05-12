@@ -5,7 +5,7 @@ import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoad
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { COLORS } from "@/constants/theme";
 import IconButton from "@/components/IconButton";
 

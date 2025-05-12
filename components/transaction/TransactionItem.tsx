@@ -45,7 +45,7 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
   return (
     <Link
       href={{
-        pathname: "/transaction/[id]",
+        pathname: "/(transaction)/[id]",
         params: {
           id,
         },
