@@ -1,12 +1,9 @@
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { FC } from "react";
+import { ComponentProps, FC } from "react";
+import Icon from "./Icon";
 
-interface IconButtonProps extends Pick<TouchableOpacityProps, "onPress"> {
-  name: keyof typeof Icon.glyphMap;
-  size: number;
-  color: string;
-}
+type IconButtonProps = Pick<TouchableOpacityProps, "onPress"> &
+  ComponentProps<typeof Icon>;
 
 const IconButton: FC<IconButtonProps> = (props) => {
   const { onPress, name, size, color } = props;
