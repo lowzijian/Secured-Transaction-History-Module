@@ -15,8 +15,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import TransactionItemIcon from "./TransactionItemIcon";
-import { DATE_FORMAT } from "@/utils/date.util";
+import TransactionCategoryIcon from "./TransactionCategoryIcon";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;
@@ -45,7 +44,7 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
       asChild
     >
       <TouchableOpacity style={styles.container}>
-        <TransactionItemIcon category={category} />
+        <TransactionCategoryIcon category={category} />
         <View style={styles.content}>
           <Text style={styles.description}>{description}</Text>
           <Text style={styles.caption}>

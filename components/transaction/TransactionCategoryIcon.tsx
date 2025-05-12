@@ -5,12 +5,13 @@ import { StyleSheet, View } from "react-native";
 import Icon from "../Icon";
 import { TRANSACTION_CATEGORY } from "@/constants/transaction";
 
-interface TransactionItemIconProps {
+interface TransactionCategoryIconProps {
   category: TransactionCategory;
+  size?: number;
 }
 
-const TransactionItemIcon: FC<TransactionItemIconProps> = (props) => {
-  const { category } = props;
+const TransactionCategoryIcon: FC<TransactionCategoryIconProps> = (props) => {
+  const { category, size = 24 } = props;
 
   const names: Record<
     TransactionCategory,
@@ -33,7 +34,7 @@ const TransactionItemIcon: FC<TransactionItemIconProps> = (props) => {
 
   return (
     <View style={styles.icon}>
-      <Icon name={names[category]} size={24} color={COLORS["primary"]} />
+      <Icon name={names[category]} size={size} color={COLORS["primary"]} />
     </View>
   );
 };
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TransactionItemIcon;
+export default TransactionCategoryIcon;
