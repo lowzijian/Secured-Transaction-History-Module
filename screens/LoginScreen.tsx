@@ -65,7 +65,9 @@ const LoginScreen = () => {
       end={{ x: 0, y: 1 }}
       style={styles.background}
     >
-      <Text style={styles.logo}>EXPO</Text>
+      <View style={styles.logoContainer}>
+        <Icon name="robot-happy" size={100} color={COLORS["text-white"]} />
+      </View>
       <View style={styles.buttonContainer}>
         <LoginButton onPress={handleLogin} />
         {renderBiometricDetail()}
@@ -82,10 +84,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  logo: {
-    color: COLORS["text-white"],
-    fontWeight: FONT_WEIGHT.BOLD,
-    fontSize: 48,
+  logoContainer: {
+    borderColor: COLORS["tertiary"],
+    borderWidth: 12,
+    height: 100,
+    width: 100,
+    borderRadius: 15,
   },
   buttonContainer: {
     marginTop: SPACING.S_4,
