@@ -43,7 +43,7 @@ const TransactionHistoryScreen = () => {
   }
 
   if (isError || !data) {
-    return <TransactionErrorState />;
+    return <TransactionErrorState onRetry={refetch} />;
   }
 
   return (

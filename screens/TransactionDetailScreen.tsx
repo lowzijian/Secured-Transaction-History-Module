@@ -1,5 +1,5 @@
 import TransactionDetailBody from "@/components/transaction/TransactionDetailBody";
-import TransactionDetailErrorState from "@/components/transaction/TransactionDetailErrorState";
+import TransactionErrorState from "@/components/transaction/TransactionErrorState";
 import TransactionDetailHeader from "@/components/transaction/TransactionDetailHeader";
 import TransactionDetailLoadingSkeleton from "@/components/transaction/TransactionDetailLoadingSkeleton";
 import { COLORS, SPACING } from "@/constants/theme";
@@ -17,6 +17,7 @@ const TransactionDetailScreen = () => {
     data: transaction,
     isError,
     isFetching,
+    refetch,
   } = useTransactionHistoryByIdQuery(params.id);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const TransactionDetailScreen = () => {
   }
 
   if (!transaction || isError) {
-    return <TransactionDetailErrorState />;
+    return <TransactionErrorState onRetry={refetch} />;
   }
 
   return (
