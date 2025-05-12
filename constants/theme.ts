@@ -25,4 +25,7 @@ export const COLORS = {
   "background-positive": "#D1FAE5",
   "background-negative": "#FEE2E2",
   "border-primary": "#A9A9A9",
+  "background-primary": "#E0F0FF",
+  "background-white": "#FFFFFF",
+  "text-primary": "#000000",
 } as const;

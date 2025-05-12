@@ -14,31 +14,22 @@ import {
   TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from "react-native";
+import TransactionItemIcon from "./TransactionItemIcon";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;
 }
 
 const TransactionItem: FC<TransactionItemProps> = (props) => {
-  const { id, amount, date, description, type, isAmountMasked } = props;
+  const { id, amount, date, description, type, isAmountMasked, category } =
+    props;
 
   const amountStyle: StyleProp<TextStyle> = [
     styles.amount,
     {
       color:
-        amount > 0 ? COLORS["content-positive"] : COLORS["content-negative"],
-    },
-  ];
-
-  const iconStyle: StyleProp<ViewStyle> = [
-    styles.icon,
-    {
-      backgroundColor:
-        amount > 0
-          ? COLORS["background-positive"]
-          : COLORS["background-negative"],
+        amount > 0 ? COLORS["content-positive"] : COLORS["text-primary"],
     },
   ];
 
@@ -54,7 +45,7 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
       asChild
     >
       <TouchableOpacity style={styles.container}>
-        <View style={iconStyle} />
+        <TransactionItemIcon category={category} />
         <View style={styles.content}>
           <Text style={styles.description}>{description}</Text>
           <Text>{formatTransactionDate(date)}</Text>

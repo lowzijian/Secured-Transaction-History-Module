@@ -1,4 +1,4 @@
-import { SPACING } from "@/constants/theme";
+import { COLORS, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
 import { FC } from "react";
 import { StyleSheet, View } from "react-native";
@@ -28,6 +28,7 @@ const TransactionList: FC<TransactionListProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     padding: SPACING.S_1,
+    backgroundColor: COLORS["background-white"],
   },
 });
 
