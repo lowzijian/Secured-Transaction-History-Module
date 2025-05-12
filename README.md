@@ -1,50 +1,90 @@
-# Welcome to your Expo app 👋
+# Secure Transaction History Module 🔐
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A Secure & User Friendly React Native app built with [Expo](https://expo.dev) that displays transaction history with biometric authentication. Sensitive data such as transaction amounts is masked and can only be revealed via Face ID or Fingerprint authentication.
 
-## Get started
+## ✨ Features
+- 🔐 Simple authentication system that allow users to login using device biometric (Face ID / Fingerprint)
+- 📄 Transaction List Screen with pull-to-refresh to stimulate data reload, sensive information like amount is masked by default and to be revealed by device biometric authorization
+- 📌 Transaction Detail Screen with full info
+- ⚙️ Error Handling for auth, network, and UI
+- 💅 Built with clean architecture and modular components
+- ✅ Written in TypeScript with React Native + Expo Router
 
-1. Install dependencies
+## 🧱 Tech Stack
+- React Native (Expo)
+- Expo Router
+- TypeScript
+- React Context API (Authorization)
+- Biometric Auth via `expo-local-authentication`
+- Persisted Auth Storage via `@react-native-async-storage/async-storage`
+- Vector icons via `@expo/vector-icons`
+- Network info via `@react-native-community/netinfo`
+- Data fetching library via `@tanstack/react-query`
+- Date utility library via `date-fns`
+- Linear Gradient via `expo-linear-gradient`
+- Testing via `jest` , `jest-expo`
+
+## 
+
+## Get Started
+
+1. Clone the repo
+
+   ``` bash
+   git clone https://github.com/lowzijian/Secured-Transaction-History-Module.git
+   cd Secured-Transaction-History-Module
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
    npx expo start
    ```
+_Make sure your simulator or device supports biometric authentication._
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Testing
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+1. Run Command
 
-## Get a fresh project
+   ```bash
+   npm run test
+   ```
 
-When you're ready, run:
+## Sample Test Result
 
-```bash
-npm run reset-project
-```
+![Unit Testing](https://github.com/user-attachments/assets/2151ebba-350d-4b67-ba6e-16da25bbc3aa)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+## What Next's
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### UI
+- [ ] Loading Skeleton
 
-## Join the community
+#### Error Hnadling
+- [ ] Authentication Error Handling
+- [ ] Network Connection Error Toastbox
 
-Join our community of developers creating universal apps.
+### Testing 
+- [ ] BDD Screen test
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Good to have
+- Layout animation
+- Smart Filter
+- Idle auto-loggedout warning popbox
+  
+
+
+
+## 🖌️ Design Inspiration
+- https://dribbble.com/shots/21089666-Transaction-history
+- https://dribbble.com/shots/25425152-Banking-App-Transaction-History-Light-Dark-Modes
+- https://dribbble.com/shots/21089666-Transaction-history
