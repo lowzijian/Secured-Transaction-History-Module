@@ -2,11 +2,11 @@
  * Formats a transaction amount into a localized currency string.
  *
  * @param amount - the numeric amount to be formatted
- * @returns A formatted string in Malaysian Ringgit (e.g., "RM1,234.56")
+ * @returns A formatted MYR currency string with plus sign if positive (e.g., "+RM1,234.56")
  *
  * @example
  * formatTransactionAmount(1234.56);
- * // Returns: "RM1,234.56"
+ * // Returns: "+RM1,234.56"
  */
 export const formatTransactionAmount = (amount: number): string => {
   const locale: Intl.LocalesArgument = "ms-MY";
@@ -17,9 +17,13 @@ export const formatTransactionAmount = (amount: number): string => {
     maximumFractionDigits: 2,
   };
 
-  return new Intl.NumberFormat(locale, options)
-    .format(amount)
+  const formattedAmount = new Intl.NumberFormat(locale, options)
+    .format(Math.abs(amount))
     .replace(/\s+/, "");
+
+  const sign = amount > 0 ? "+" : "";
+
+  return `${sign}${formattedAmount}`;
 };
 
 /**
