@@ -1,5 +1,5 @@
 import IconButton from "@/components/IconButton";
-import { COLORS, FONT_WEIGHT } from "@/constants/theme";
+import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
 import { Redirect, Stack } from "expo-router";
 import { View } from "react-native";
@@ -31,7 +31,7 @@ export default function ProtectedLayout() {
         options={{
           title: "Transaction History",
           headerLeft: () => (
-            <View style={{ width: 24, height: 24 }}>
+            <View style={{ width: 24, height: 24, marginRight: SPACING.S_1 }}>
               <IconButton
                 onPress={onSignOut}
                 name="logout-variant"
