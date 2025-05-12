@@ -1,6 +1,7 @@
 import { DATE_FORMAT } from "./date.util";
 import { format } from "date-fns";
 import { ValueOf } from "./types";
+import { Transaction } from "@/models/transaction.model";
 
 /**
  * Formats a transaction amount into a localized currency string.
@@ -61,4 +62,32 @@ export const formatTransactionDate = (
   > = DATE_FORMAT.SHORT_MONTH_DAY_YEAR_WITH_COMMA
 ): string => {
   return format(new Date(date), _format);
+};
+
+export const groupedTransactionByMonth = (transactions: Transaction[]) => {
+  return transactions
+    .map((txn) => ({
+      ...txn,
+      month: formatTransactionDate(txn.date, DATE_FORMAT.MONTH_YEAR),
+    }))
+    .reduce(
+      (acc, txn) => {
+        const { month, ...rest } = txn;
+
+        return {
+          ...acc,
+          [month]: {
+            total: (acc[month]?.total || 0) + txn.amount,
+            transactions: [...(acc[month]?.transactions || []), rest],
+          },
+        };
+      },
+      {} as Record<
+        string,
+        {
+          total: number;
+          transactions: Transaction[];
+        }
+      >
+    );
 };
