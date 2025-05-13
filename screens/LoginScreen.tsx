@@ -1,5 +1,4 @@
-import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { router } from "expo-router";
+import { COLORS, SPACING } from "@/constants/theme";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";

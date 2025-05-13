@@ -1,4 +1,3 @@
-import ListRefreshControl from "@/components/ListRefreshControl";
 import TransactionErrorState from "@/components/transaction/TransactionErrorState";
 import TransactionList from "@/components/transaction/TransactionList";
 import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
