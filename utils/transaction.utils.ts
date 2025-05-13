@@ -67,56 +67,37 @@ export const formatTransactionDate = (
 /**
  * Groups transactions by month and calculates the total amount for each month.
  *
- * @param transactions - an array of transaction objects
- * @returns An object where each key is a month and the value is an object containing the total amount and an array of transactions for that month
+ * @param transactions - an array of transactions to be grouped
+ * @returns An array of objects, each containing the month, total amount, and transactions for that month
  *
  * @example
- * groupedTransactionByMonth([
- *   { id: 1, date: "2024-01-01T00:00:00Z", amount: 100 },
- *   { id: 2, date: "2024-01-15T00:00:00Z", amount: 200 },
- *   { id: 3, date: "2024-02-01T00:00:00Z", amount: 300 },
- * ]);
- * // Returns:
- * // {
- * //   "January 2024": {
- * //     total: 300,
- * //     transactions: [
- * //       { id: 1, date: "2024-01-01T00:00:00Z", amount: 100 },
- * //       { id: 2, date: "2024-01-15T00:00:00", amount: 200 }
- * //     ]
- * //   },
- * //   "February 2024": {
- * //     total: 300,
- * //     transactions: [
- * //       { id: 3, date: "2024-02-01T00:00:00Z", amount: 300 }
- * //     ]
- * //   }
- * // }
+ * groupedTransactionByMonth(transactions);
+ * // Returns: [
+ * //   { title: "Jan 2023", total: 1000, data: [...] },
+ * //   { title: "Feb 2023", total: 2000, data: [...] },
+ * // ]
  */
 export const groupedTransactionByMonth = (transactions: Transaction[]) => {
-  return transactions
-    .map((txn) => ({
-      ...txn,
-      month: formatTransactionDate(txn.date, DATE_FORMAT.MONTH_YEAR),
-    }))
-    .reduce(
-      (acc, txn) => {
-        const { month, ...rest } = txn;
-
-        return {
-          ...acc,
-          [month]: {
-            total: (acc[month]?.total || 0) + txn.amount,
-            transactions: [...(acc[month]?.transactions || []), rest],
-          },
-        };
-      },
-      {} as Record<
-        string,
-        {
-          total: number;
-          transactions: Transaction[];
-        }
-      >
+  const groupedTransactions = transactions.reduce<
+    Record<string, Transaction[]>
+  >((acc, transaction) => {
+    const month = formatTransactionDate(
+      transaction.date,
+      DATE_FORMAT.MONTH_YEAR
     );
+    return {
+      ...acc,
+      [month]: (acc[month] ?? []).concat(transaction),
+    };
+  }, {});
+
+  return Object.entries(groupedTransactions).map(([month, transactions]) => {
+    return {
+      title: month,
+      total: transactions.reduce((acc, transaction) => {
+        return acc + transaction.amount;
+      }, 0),
+      data: transactions,
+    };
+  });
 };
