@@ -5,8 +5,8 @@ import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoad
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { COLORS, SPACING } from "@/constants/theme";
+import { View } from "react-native";
+import { COLORS } from "@/constants/theme";
 import IconButton from "@/components/IconButton";
 import useAuthContext from "@/hooks/useAuthContext";
 
@@ -26,7 +26,7 @@ const TransactionHistoryScreen = () => {
     }
   }, [data]);
 
-  const onRefetch = () => {
+  const onPullToRefresh = () => {
     refetch();
   };
 
@@ -62,28 +62,15 @@ const TransactionHistoryScreen = () => {
           ),
         }}
       />
-      <ScrollView
-        refreshControl={<ListRefreshControl onRefresh={onRefetch} />}
-        contentContainerStyle={styles.contentContainer}
-      >
-        {isFetching && !isLoading && <Text style={styles.loadingText}>Loading...</Text>}
-        <TransactionList transactions={data} isAmountMasked={isAmountMasked} />
-      </ScrollView>
+
+      <TransactionList
+        transactions={data}
+        isAmountMasked={isAmountMasked}
+        onPullToRefresh={onPullToRefresh}
+        isRefreshing={isFetching}
+      />
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    backgroundColor: COLORS["background-white"],
-    paddingHorizontal: SPACING.S_2,
-    paddingVertical: SPACING.S_3,
-  },
-  loadingText: {
-    color: COLORS["content-secondary"],
-    textAlign: "center",
-    paddingVertical: SPACING.S_2,
-  }
-});
 
 export default TransactionHistoryScreen;
