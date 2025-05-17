@@ -77,6 +77,7 @@ const TransactionList: FC<TransactionListProps> = (props) => {
       refreshControl={
         <RefreshControl onRefresh={onPullToRefresh} refreshing={isRefreshing} />
       }
+      stickySectionHeadersEnabled={false}
     />
   );
 };
