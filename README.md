@@ -24,7 +24,93 @@ A Secure & User Friendly React Native app built with [Expo](https://expo.dev) th
 - Linear Gradient via `expo-linear-gradient`
 - Testing via `jest` , `jest-expo`
 
-## 🗃️ Project Structure - TBD
+## 🗃️ Project Structure
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Files</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <b>app</b>
+      </td>
+      <td>main directory for all routes.</td>
+    </tr>
+    <tr>
+      <td>
+        <b>screens</b>
+      </td>
+      <td>directory containing screen components used in routes</td>
+    </tr>
+    <tr>
+      <td>
+        <b>components</b>
+      </td>
+      <td>
+        directory for reusable ui components, transactions , login components
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>hooks</b>
+      </td>
+      <td>directory for custom react hooks e.g query hooks</td>
+    </tr>
+    <tr>
+      <td>
+        <b>constant</b>
+      </td>
+      <td>directory for app-wide constants values</td>
+    </tr>
+    <tr>
+      <td>
+        <b>assets</b>
+      </td>
+      <td>directory for static assets like images, fonts or icons</td>
+    </tr>
+    <tr>
+      <td>
+        <b>mocks</b>
+      </td>
+      <td>contains mock transactions for testing and devlopment</td>
+    </tr>
+    <tr>
+      <td>
+        <b>services</b>
+      </td>
+      <td>houses APIs fetch logic and biometric authentication service</td>
+    </tr>
+    <tr>
+      <td>
+        <b>models</b>
+      </td>
+      <td>define typescript interfaces or types for transaction related data structures</td>
+    </tr>
+    <tr>
+      <td>
+        <b>utils</b>
+      </td>
+      <td>directory of all utility functions</td>
+    </tr>
+      <tr>
+      <td>
+        <b>context</b>
+      </td>
+      <td>directory of all react context api + providers </td>
+    </tr>
+       <tr>
+      <td>
+        <b>__tests__</b>
+      </td>
+      <td>directory of all unit tests </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Get Started
 
