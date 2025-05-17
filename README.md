@@ -112,6 +112,62 @@ A Secure & User Friendly React Native app built with [Expo](https://expo.dev) th
   </tbody>
 </table>
 
+**File-based Routing**
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        _layout
+      </td>
+      <td>
+        root layout file, wraps all routes and providers
+      </td>
+    </tr>
+    <tr>
+      <td>
+        login
+      </td>
+      <td>
+        Define `/login` route and display login screen
+      </td>
+    </tr>
+    <tr>
+      <td>
+        (transaction)
+      </td>
+      <td>
+        folder grouping transaction-related routes
+      </td>
+    </tr>
+    <tr>
+      <td>
+        (transaction)/_layout
+      </td>
+      <td>
+        layout file define stack navigation for transactions routes and houses authentication redirect logic
+      </td>
+    </tr>
+    <tr>
+      <td>
+        (transaction)/index
+      </td>
+      <td>
+        Define the `/` route for transaction history, displays transaction history screen
+      </td>
+    </tr>
+     <tr>
+      <td>
+        (transaction)/[id]
+      </td>
+      <td>
+        Dynamic route for /[id]. Displays details for a specific transaction based on the id.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## Get Started
 
 1. Clone the repo
