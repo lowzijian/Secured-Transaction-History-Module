@@ -4,7 +4,7 @@ import ShimmerPlaceholder from "../ShimmerPlaceholder";
 
 const SKELETON_COUNT = 10;
 
-const TransactionLoadingSkeleton = () => {
+const TransactionListLoadingSkeleton = () => {
   const renderSkeletonItem = (index: number) => (
     <View key={index} style={styles.itemContainer}>
       <ShimmerPlaceholder width={40} height={40} borderRadius={20} />
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TransactionLoadingSkeleton;
+export default TransactionListLoadingSkeleton;

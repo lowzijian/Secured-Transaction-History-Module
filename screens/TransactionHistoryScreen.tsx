@@ -1,6 +1,6 @@
 import TransactionErrorState from "@/components/transaction/TransactionErrorState";
 import TransactionList from "@/components/transaction/TransactionList";
-import TransactionLoadingSkeleton from "@/components/transaction/TransactionLoadingSkeleton";
+import TransactionListLoadingSkeleton from "@/components/transaction/TransactionListLoadingSkeleton";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ const TransactionHistoryScreen = () => {
   };
 
   if (isLoading) {
-    return <TransactionLoadingSkeleton />;
+    return <TransactionListLoadingSkeleton />;
   }
 
   if (isError || !data) {
