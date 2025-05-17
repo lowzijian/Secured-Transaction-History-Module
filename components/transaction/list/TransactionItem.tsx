@@ -1,21 +1,21 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
 import {
-  maskTransactionAmount,
-  formatTransactionDate,
-  formatTransactionAmount,
+    formatTransactionAmount,
+    formatTransactionDate,
+    maskTransactionAmount,
 } from "@/utils/transaction.utils";
 import { Link } from "expo-router";
 import { FC } from "react";
 import {
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableOpacity,
+    View,
 } from "react-native";
-import TransactionCategoryIcon from "./TransactionCategoryIcon";
+import TransactionCategoryIcon from "../TransactionCategoryIcon";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;

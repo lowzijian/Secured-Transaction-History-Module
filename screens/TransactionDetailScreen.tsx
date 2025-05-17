@@ -1,7 +1,7 @@
-import TransactionDetailBody from "@/components/transaction/TransactionDetailBody";
+import TransactionDetailBody from "@/components/transaction/detail/TransactionDetailBody";
+import TransactionDetailHeader from "@/components/transaction/detail/TransactionDetailHeader";
+import TransactionDetailLoadingSkeleton from "@/components/transaction/detail/TransactionDetailLoadingSkeleton";
 import TransactionErrorState from "@/components/transaction/TransactionErrorState";
-import TransactionDetailHeader from "@/components/transaction/TransactionDetailHeader";
-import TransactionDetailLoadingSkeleton from "@/components/transaction/TransactionDetailLoadingSkeleton";
 import { COLORS, SPACING } from "@/constants/theme";
 import useTransactionHistoryByIdQuery from "@/hooks/useTransactionHistoryByIdQuery";
 import { useLocalSearchParams, useNavigation } from "expo-router";

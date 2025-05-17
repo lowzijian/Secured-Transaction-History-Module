@@ -3,7 +3,7 @@ import { TRANSACTION_STATUS } from "@/constants/transaction";
 import { Transaction, TransactionStatus } from "@/models/transaction.model";
 import { ComponentProps, FC, Fragment } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Icon from "../Icon";
+import Icon from "../../Icon";
 
 type TransactionDetailBodyProps = Transaction;
 

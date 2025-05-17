@@ -1,12 +1,12 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
+import { TransactionCategory } from "@/models/transaction.model";
 import {
-  formatTransactionAmount,
-  formatTransactionDate,
+    formatTransactionAmount,
+    formatTransactionDate,
 } from "@/utils/transaction.utils";
 import { FC } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import TransactionCategoryIcon from "./TransactionCategoryIcon";
-import { TransactionCategory } from "@/models/transaction.model";
+import TransactionCategoryIcon from "../TransactionCategoryIcon";
 
 interface TransactionDetailHeaderProps {
   amount: number;

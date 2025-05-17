@@ -1,23 +1,23 @@
-import { Transaction } from "@/models/transaction.model";
-import { FC } from "react";
-import TransactionItem from "./TransactionItem";
-import {
-  formatTransactionAmount,
-  groupedTransactionByMonth,
-  maskTransactionAmount,
-} from "@/utils/transaction.utils";
-import {
-  SectionList,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  SectionListProps,
-  RefreshControl,
-} from "react-native";
 import { COLORS, SPACING } from "@/constants/theme";
+import { Transaction } from "@/models/transaction.model";
+import {
+    formatTransactionAmount,
+    groupedTransactionByMonth,
+    maskTransactionAmount,
+} from "@/utils/transaction.utils";
 import { ArrayElement } from "@/utils/types";
+import { FC } from "react";
+import {
+    RefreshControl,
+    SectionList,
+    SectionListProps,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    View,
+} from "react-native";
+import TransactionItem from "./TransactionItem";
 
 interface TransactionListProps {
   transactions: Transaction[];

@@ -1,6 +1,6 @@
 import { COLORS, SPACING } from "@/constants/theme";
 import { StyleSheet, View } from "react-native";
-import ShimmerPlaceholder from "../ShimmerPlaceholder";
+import ShimmerPlaceholder from "../../ShimmerPlaceholder";
 
 const SKELETON_COUNT = 10;
 
