@@ -4,6 +4,7 @@ import { Transaction, TransactionStatus } from "@/models/transaction.model";
 import { ComponentProps, FC, Fragment } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "../../Icon";
+import Divider from "@/components/Divider";
 
 type TransactionDetailBodyProps = Transaction;
 
@@ -131,7 +132,7 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
             {rows.map(renderTransactionDetailRow)}
           </View>
           {index < Object.keys(groupedTransactionDetails).length - 1 && (
-            <View style={styles.divider} />
+            <Divider />
           )}
         </Fragment>
       ))}
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: SPACING.S_2,
     paddingHorizontal: SPACING.S_3,
+    gap: SPACING.S_3,
   },
   group: {
     gap: SPACING.S_2,
@@ -158,11 +160,6 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 16,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: COLORS["border-primary"],
-    marginVertical: SPACING.S_3,
   },
   statusChip: {
     paddingHorizontal: SPACING.S_1,

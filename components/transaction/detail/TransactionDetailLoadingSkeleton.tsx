@@ -1,7 +1,11 @@
+import Divider from "@/components/Divider";
 import ShimmerPlaceholder from "@/components/ShimmerPlaceholder";
 import { COLORS, SPACING } from "@/constants/theme";
 import { Fragment } from "react";
 import { StyleSheet, View } from "react-native";
+
+const SKELETON_GROUP_COUNT = 3;
+const SKELETON_GROUP_ROW_COUNT = 3;
 
 const TransactionDetailLoadingSkeleton = () => {
   const renderHeaderSkeleton = () => (
@@ -22,15 +26,19 @@ const TransactionDetailLoadingSkeleton = () => {
   const renderGroupSkeletons = (index: number) => (
     <Fragment key={index}>
       <View style={styles.group} key={index}>
-        {Array.from({ length: 3 }, (_, index) => renderItemRowSkeleton(index))}
+        {Array.from({ length: SKELETON_GROUP_ROW_COUNT }, (_, index) =>
+          renderItemRowSkeleton(index)
+        )}
       </View>
-      {index < 2 && <View style={styles.divider} />}
+      {index < SKELETON_GROUP_ROW_COUNT - 1 && <Divider />}
     </Fragment>
   );
 
   const renderBodySkeleton = () => (
     <View style={styles.bodyContainer}>
-      {Array.from({ length: 3 }, (_, index) => renderGroupSkeletons(index))}
+      {Array.from({ length: SKELETON_GROUP_COUNT }, (_, index) =>
+        renderGroupSkeletons(index)
+      )}
     </View>
   );
 
@@ -59,6 +67,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.S_2,
     paddingHorizontal: SPACING.S_3,
     width: "100%",
+    gap: SPACING.S_3,
   },
   itemSkeleton: {
     flexDirection: "row",
@@ -67,11 +76,6 @@ const styles = StyleSheet.create({
   },
   group: {
     gap: SPACING.S_2,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: COLORS["border-primary"],
-    marginVertical: SPACING.S_3,
   },
 });
 
