@@ -16,7 +16,7 @@ const TransactionDetailScreen = () => {
   const {
     data: transaction,
     isError,
-    isFetching,
+    isLoading,
     refetch,
   } = useTransactionHistoryByIdQuery(params.id);
 
@@ -26,7 +26,7 @@ const TransactionDetailScreen = () => {
     });
   }, [navigation]);
 
-  if (isFetching) {
+  if (isLoading) {
     return <TransactionDetailLoadingSkeleton />;
   }
 
