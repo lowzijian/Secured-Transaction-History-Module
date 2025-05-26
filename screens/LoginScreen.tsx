@@ -1,60 +1,16 @@
 import { COLORS, SPACING } from "@/constants/theme";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import useAuthContext from "@/hooks/useAuthContext";
 import LoginButton from "@/components/auth/LoginButton";
-import useAuthBiometricSupport from "@/hooks/useAuthBiometricSupport";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const LoginScreen = () => {
   const { onSignIn } = useAuthContext();
-  const { isBiometricSupported, supportedTypes } = useAuthBiometricSupport();
 
   const handleLogin = async () => {
     await onSignIn();
-  };
-
-  const renderBiometricSupportedTypeIndicator = (type: string) => {
-    const names: Record<string, keyof typeof Icon.glyphMap> = {
-      FINGERPRINT: "fingerprint",
-      FACIAL_RECOGNITION: "face-recognition",
-      IRIS: "eye",
-    };
-
-    return (
-      <Icon
-        name={names[type]}
-        size={12}
-        color={COLORS["text-white"]}
-        key={type}
-      />
-    );
-  };
-
-  const renderBiometricDetail = () => {
-    return (
-      <View style={styles.biometricDetail}>
-        <Text style={styles.biometricStatusText}>Biometric authentication</Text>
-        <View
-          style={[
-            styles.biometricStatus,
-            {
-              backgroundColor: isBiometricSupported
-                ? COLORS["background-positive"]
-                : COLORS["background-negative"],
-              borderColor: isBiometricSupported
-                ? COLORS["content-positive"]
-                : COLORS["content-negative"],
-              borderWidth: 1,
-            },
-          ]}
-        />
-        <View style={styles.divider} />
-        <Text style={styles.biometricStatusText}>Supported :</Text>
-        {supportedTypes.map(renderBiometricSupportedTypeIndicator)}
-      </View>
-    );
   };
 
   return (
@@ -69,7 +25,6 @@ const LoginScreen = () => {
       </View>
       <View style={styles.buttonContainer}>
         <LoginButton onPress={handleLogin} />
-        {renderBiometricDetail()}
       </View>
     </LinearGradient>
   );
