@@ -1,73 +1,112 @@
-import { COLORS, SPACING } from "@/constants/theme";
+import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Text, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import useAuthContext from "@/hooks/useAuthContext";
-import LoginButton from "@/components/auth/LoginButton";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import LoginButton from "@/components/auth/GetStartedButton";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+const LOGO_SIZE = 40;
 
 const LoginScreen = () => {
   const { onSignIn } = useAuthContext();
+  const { bottom } = useSafeAreaInsets();
 
-  const handleLogin = async () => {
-    await onSignIn();
-  };
+  const renderContent = () => (
+    <View>
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("@/assets/images/logo.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.brand}>Trusta</Text>
+      </View>
+      <Text style={styles.heading}>
+        Let&apos;s grow your financial future together
+      </Text>
+      <Text style={styles.subheading}>
+        Trusta helps you manage your finances with confidence, protect what
+        matters, and achieve your goals — building a brighter future for you and
+        your family.
+      </Text>
+    </View>
+  );
+
+  const renderGetStartedButton = () => <LoginButton onPress={onSignIn} />;
 
   return (
-    <LinearGradient
-      colors={[COLORS.primary, COLORS.secondary]} // top to bottom
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
-      style={styles.background}
+    <ImageBackground
+      style={styles.container}
+      source={require("@/assets/images/background.png")}
+      resizeMode="cover"
     >
-      <View style={styles.logoContainer}>
-        <Icon name="robot-happy" size={100} color={COLORS["text-white"]} />
+      <LinearGradient
+        colors={[
+          "rgba(0, 0, 255, 1)",
+          "rgba(0, 0, 255, 0.7)",
+          "rgba(0, 0, 255, 0.4)",
+          "rgba(0, 0, 255, 0.3)",
+          "rgba(255, 255, 255, 0.7)",
+          "rgba(255, 255, 255, 0.9)",
+          "rgba(255, 255, 255, 1)",
+        ]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={styles.background}
+      />
+      <View
+        style={[
+          styles.body,
+          {
+            paddingBottom: bottom + SPACING.S_4,
+          },
+        ]}
+      >
+        {renderContent()}
+        {renderGetStartedButton()}
       </View>
-      <View style={styles.buttonContainer}>
-        <LoginButton onPress={handleLogin} />
-      </View>
-    </LinearGradient>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    padding: SPACING.S_2,
-    backgroundColor: COLORS["primary"],
+  container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "flex-end",
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  body: {
+    gap: SPACING.S_2,
+    paddingHorizontal: SPACING.S_2,
   },
   logoContainer: {
-    borderColor: COLORS["tertiary"],
-    borderWidth: 12,
-    height: 100,
-    width: 100,
-    borderRadius: 15,
-  },
-  buttonContainer: {
-    marginTop: SPACING.S_4,
-  },
-  biometricDetail: {
-    marginTop: SPACING.S_2,
     flexDirection: "row",
+    gap: SPACING.S_0,
     alignItems: "center",
-    gap: SPACING.S_1,
+    marginBottom: SPACING.S_2,
   },
-  biometricStatus: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+  logo: {
+    width: LOGO_SIZE,
+    height: LOGO_SIZE,
   },
-  biometricStatusText: {
-    fontSize: 14,
-    color: COLORS["text-white"],
+  brand: {
+    fontSize: 24,
+    fontWeight: FONT_WEIGHT.SEMIBOLD,
+    color: COLORS["primary"],
   },
-  divider: {
-    width: 1,
-    height: 14,
-    backgroundColor: COLORS["text-white"],
-    marginHorizontal: SPACING.S_1,
+  heading: {
+    fontSize: 30,
+    fontWeight: FONT_WEIGHT.BOLD,
+    lineHeight: 36,
+    marginBottom: SPACING.S_1,
+  },
+  subheading: {
+    fontSize: 18,
+    color: COLORS["content-secondary"],
+    lineHeight: 24,
   },
 });
 

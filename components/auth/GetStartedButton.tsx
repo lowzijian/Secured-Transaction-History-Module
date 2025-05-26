@@ -7,11 +7,11 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { COLORS, SPACING } from "@/constants/theme";
+import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 
-type LoginButtonProps = Pick<TouchableOpacityProps, "onPress">;
+type GetStartedButtonProps = Pick<TouchableOpacityProps, "onPress">;
 
-const LoginButton: FC<LoginButtonProps> = (props) => {
+const GetStartedButton: FC<GetStartedButtonProps> = (props) => {
   const { onPress } = props;
 
   return (
@@ -21,7 +21,7 @@ const LoginButton: FC<LoginButtonProps> = (props) => {
       activeOpacity={0.8}
     >
       <View style={styles.content}>
-        <Text style={styles.text}>Login</Text>
+        <Text style={styles.text}>Get Started</Text>
         <Icon name="arrow-right" size={20} color={COLORS["text-white"]} />
       </View>
     </TouchableOpacity>
@@ -31,14 +31,12 @@ const LoginButton: FC<LoginButtonProps> = (props) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: COLORS["primary"],
-    paddingVertical: 12,
-    paddingHorizontal: SPACING.S_2,
+    padding: SPACING.S_2,
     borderRadius: 24,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 2 },
-    alignSelf: "center",
   },
   content: {
     flexDirection: "row",
@@ -48,8 +46,8 @@ const styles = StyleSheet.create({
   text: {
     color: COLORS["text-white"],
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: FONT_WEIGHT.SEMIBOLD,
   },
 });
 
-export default LoginButton;
+export default GetStartedButton;
