@@ -253,9 +253,11 @@ _Make sure your simulator or device supports biometric authentication._
 #### Feature Ideas
 - Smart Filter
 - Idle auto-loggedout warning popbox
+- Custom Icon
 
 
 ## 🖌️ Design Inspiration
 - https://dribbble.com/shots/21089666-Transaction-history
 - https://dribbble.com/shots/25425152-Banking-App-Transaction-History-Light-Dark-Modes
 - https://dribbble.com/shots/21089666-Transaction-history
+- https://dribbble.com/shots/25596852-Welcome-Screen-Mobile-App
