@@ -11,7 +11,7 @@ const Body: FC<BodyProps> = (props) => {
       allowFontScaling={false}
       style={[
         {
-          fontSize: Platform.OS === "ios" ? 16 : 14,
+          fontSize: Platform.OS === "ios" ? 15 : 14,
           fontWeight: FONT_WEIGHT.REGULAR,
         },
         style,

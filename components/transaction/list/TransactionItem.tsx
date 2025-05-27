@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontWeight: FONT_WEIGHT.MEDIUM,
-    fontSize: 14,
   },
   detailRow: {
     flexDirection: "row",
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
     color: COLORS["content-secondary"],
   },
   amount: {
-    fontSize: 14,
     fontWeight: FONT_WEIGHT.MEDIUM,
   },
 });

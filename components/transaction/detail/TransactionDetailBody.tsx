@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 14,
     color: COLORS["content-secondary"],
   },
   value: {
