@@ -1,8 +1,8 @@
 import IconButton from "@/components/IconButton";
-import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
+import { COLORS, FONT_WEIGHT } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
 import { Redirect, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function ProtectedLayout() {
   const { isLoggedIn, isReady, onSignOut } = useAuthContext();
