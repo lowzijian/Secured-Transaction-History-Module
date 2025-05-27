@@ -1,7 +1,8 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import Icon from "../Icon";
 import { FC } from "react";
+import Body from "@/components/Body";
 
 interface TransactionErrorStateProps {
   onRetry: VoidFunction;
@@ -18,11 +19,11 @@ const TransactionErrorState: FC<TransactionErrorStateProps> = (props) => {
         color={COLORS["primary"]}
         style={styles.logo}
       />
-      <Text style={styles.label}>Something went wrong</Text>
-      <Text style={styles.caption}>
+      <Body style={styles.label}>Something went wrong</Body>
+      <Body style={styles.caption}>
         Bzzt... initializing protocol sequence 9X-Δ. Zrrrp! Memory core
         overloaded with snack data.
-      </Text>
+      </Body>
       <Button title="Retry" onPress={onRetry} color={COLORS["primary"]} />
     </View>
   );

@@ -5,8 +5,9 @@ import {
     formatTransactionDate,
 } from "@/utils/transaction.utils";
 import { FC } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import TransactionCategoryIcon from "../TransactionCategoryIcon";
+import Body from "@/components/Body";
 
 interface TransactionDetailHeaderProps {
   amount: number;
@@ -28,8 +29,8 @@ const TransactionDetailHeader: FC<TransactionDetailHeaderProps> = (props) => {
           </View>
         )}
       </View>
-      <Text style={styles.header}>{formatTransactionAmount(amount)}</Text>
-      <Text style={styles.caption}>{formatTransactionDate(date)}</Text>
+      <Body style={styles.header}>{formatTransactionAmount(amount)}</Body>
+      <Body style={styles.caption}>{formatTransactionDate(date)}</Body>
     </View>
   );
 };

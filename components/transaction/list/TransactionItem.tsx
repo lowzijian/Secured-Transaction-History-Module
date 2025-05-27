@@ -10,7 +10,6 @@ import { FC } from "react";
 import {
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   TouchableOpacity,
   View,
@@ -19,6 +18,7 @@ import TransactionCategoryIcon from "../TransactionCategoryIcon";
 import { DATE_FORMAT } from "@/utils/date.util";
 import Icon from "@/components/Icon";
 import { TRANSACTION_TYPE } from "@/constants/transaction";
+import Body from "@/components/Body";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;
@@ -49,17 +49,17 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
       <TouchableOpacity style={styles.container}>
         <TransactionCategoryIcon category={category} />
         <View style={styles.content}>
-          <Text style={styles.description}>{description}</Text>
+          <Body style={styles.description}>{description}</Body>
           <View style={styles.detailRow}>
             <Icon
               name={"calendar-outline"}
               size={14}
               color={COLORS["content-secondary"]}
             />
-            <Text style={styles.caption}>
+            <Body style={styles.caption}>
               {formatTransactionDate(date, DATE_FORMAT.SHORT_MONTH_DAY)}
-            </Text>
-            <Text style={styles.caption}>•</Text>
+            </Body>
+            <Body style={styles.caption}>•</Body>
             <Icon
               name={
                 type === TRANSACTION_TYPE.CREDIT
@@ -69,14 +69,14 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
               size={14}
               color={COLORS["content-secondary"]}
             />
-            <Text style={styles.caption}>{type.toUpperCase()}</Text>
+            <Body style={styles.caption}>{type.toUpperCase()}</Body>
           </View>
         </View>
-        <Text style={amountStyle}>
+        <Body style={amountStyle}>
           {isAmountMasked
             ? maskTransactionAmount(amount)
             : formatTransactionAmount(amount)}
-        </Text>
+        </Body>
       </TouchableOpacity>
     </Link>
   );

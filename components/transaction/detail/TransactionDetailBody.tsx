@@ -2,9 +2,10 @@ import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import { TRANSACTION_STATUS } from "@/constants/transaction";
 import { Transaction, TransactionStatus } from "@/models/transaction.model";
 import { ComponentProps, FC, Fragment } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Icon from "../../Icon";
 import Divider from "@/components/Divider";
+import Body from "@/components/Body";
 
 type TransactionDetailBodyProps = Transaction;
 
@@ -103,9 +104,9 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
           size={16}
           color={statusLabelStyle[statusLabel].color}
         />
-        <Text style={{ color: statusLabelStyle[statusLabel].color }}>
+        <Body style={{ color: statusLabelStyle[statusLabel].color }}>
           {status.toUpperCase()}
-        </Text>
+        </Body>
       </View>
     );
   };
@@ -115,11 +116,11 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
     value: string;
   }) => (
     <View style={styles.row} key={item.title}>
-      <Text style={styles.title}>{item.title.toUpperCase()}</Text>
+      <Body style={styles.title}>{item.title.toUpperCase()}</Body>
       {item.title === "Status" ? (
         renderStatusChip(item.value)
       ) : (
-        <Text style={styles.value}>{item.value}</Text>
+        <Body style={styles.value}>{item.value}</Body>
       )}
     </View>
   );

@@ -1,10 +1,11 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import React from "react";
-import { Image, StyleSheet, View, Text, ImageBackground } from "react-native";
+import { Image, StyleSheet, View, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import useAuthContext from "@/hooks/useAuthContext";
 import LoginButton from "@/components/auth/GetStartedButton";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Body from "@/components/Body";
 
 const LOGO_SIZE = 40;
 
@@ -19,16 +20,16 @@ const LoginScreen = () => {
           source={require("@/assets/images/logo.png")}
           style={styles.logo}
         />
-        <Text style={styles.brand}>Trusta</Text>
+        <Body style={styles.brand}>Trusta</Body>
       </View>
-      <Text style={styles.heading}>
+      <Body style={styles.heading}>
         Let&apos;s grow your financial future together
-      </Text>
-      <Text style={styles.subheading}>
+      </Body>
+      <Body style={styles.subheading}>
         Trusta helps you manage your finances with confidence, protect what
         matters, and achieve your goals — building a brighter future for you and
         your family.
-      </Text>
+      </Body>
     </View>
   );
 

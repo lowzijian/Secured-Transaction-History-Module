@@ -13,12 +13,12 @@ import {
   SectionListProps,
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   View,
 } from "react-native";
 import TransactionItem from "./TransactionItem";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Body from "@/components/Body";
 
 interface TransactionListProps {
   transactions: Transaction[];
@@ -41,7 +41,7 @@ const TransactionList: FC<TransactionListProps> = (props) => {
 
   const renderSectionHeader: TransactionListSectionProps["renderSectionHeader"] =
     ({ section: { title } }) => (
-      <Text style={styles.label}>{title.toUpperCase()}</Text>
+      <Body style={styles.label}>{title.toUpperCase()}</Body>
     );
 
   const renderItem: TransactionListSectionProps["renderItem"] = ({
@@ -57,12 +57,12 @@ const TransactionList: FC<TransactionListProps> = (props) => {
 
       return (
         <View style={styles.footer}>
-          <Text style={styles.caption}>Total</Text>
-          <Text style={totalAmountStyle}>
+          <Body style={styles.caption}>Total</Body>
+          <Body style={totalAmountStyle}>
             {isAmountMasked
               ? maskTransactionAmount(total)
               : formatTransactionAmount(total)}
-          </Text>
+          </Body>
         </View>
       );
     };

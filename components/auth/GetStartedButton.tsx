@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import {
   TouchableOpacity,
-  Text,
   StyleSheet,
   View,
   TouchableOpacityProps,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
+import Body from "@/components/Body";
 
 type GetStartedButtonProps = Pick<TouchableOpacityProps, "onPress">;
 
@@ -21,7 +21,7 @@ const GetStartedButton: FC<GetStartedButtonProps> = (props) => {
       activeOpacity={0.8}
     >
       <View style={styles.content}>
-        <Text style={styles.text}>Get Started</Text>
+        <Body style={styles.text}>Get Started</Body>
         <Icon name="arrow-right" size={20} color={COLORS["text-white"]} />
       </View>
     </TouchableOpacity>
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLORS["text-white"],
-    fontSize: 16,
     fontWeight: FONT_WEIGHT.SEMIBOLD,
   },
 });
