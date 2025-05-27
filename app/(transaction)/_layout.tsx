@@ -1,3 +1,4 @@
+import Icon from "@/components/Icon";
 import IconButton from "@/components/IconButton";
 import { COLORS, FONT_WEIGHT } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
@@ -19,11 +20,7 @@ export default function ProtectedLayout() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: { backgroundColor: COLORS.primary },
-        headerTintColor: COLORS["text-white"],
-        headerTitleStyle: {
-          fontWeight: FONT_WEIGHT.BOLD,
-        },
+        headerTitleAlign: "center",
       }}
     >
       <Stack.Screen
@@ -40,17 +37,34 @@ export default function ProtectedLayout() {
               />
             </View>
           ),
-          headerStyle: styles.header,
-          headerTitleAlign: "center",
-          headerTitleStyle: styles.headerTitle,
+          headerStyle: {
+            backgroundColor: COLORS["background-white"],
+          },
+          headerTitleStyle: [styles.headerTitle, { color: COLORS["primary"] }],
         }}
       />
       <Stack.Screen
         name="[id]"
-        options={{
+        options={({ navigation }) => ({
           title: "Transaction Detail",
-          headerBackButtonDisplayMode: "minimal",
-        }}
+          headerStyle: {
+            backgroundColor: COLORS["primary"],
+          },
+          headerLeft: () => (
+            <View style={styles.headerAction}>
+              <IconButton
+                onPress={navigation.goBack}
+                name="arrow-left"
+                size={20}
+                color={COLORS["text-white"]}
+              />
+            </View>
+          ),
+          headerTitleStyle: [
+            styles.headerTitle,
+            { color: COLORS["text-white"] },
+          ],
+        })}
       />
     </Stack>
   );
@@ -61,13 +75,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  header: {
-    backgroundColor: COLORS["background-white"],
-  },
   headerTitle: {
     fontWeight: FONT_WEIGHT.REGULAR,
     fontSize: 16,
-    color: COLORS["primary"],
-    textAlign: "center",
   },
 });
