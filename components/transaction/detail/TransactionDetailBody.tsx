@@ -70,7 +70,7 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
       {item.title === "Status" ? (
         <TransactionStatusBadge status={status} />
       ) : (
-        <Body style={styles.value}>{item.value}</Body>
+        <Body>{item.value}</Body>
       )}
     </View>
   );
@@ -107,9 +107,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: COLORS["content-secondary"],
-  },
-  value: {
-    fontSize: 16,
   },
 });
 
