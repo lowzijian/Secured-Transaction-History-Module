@@ -1,11 +1,10 @@
-import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { TRANSACTION_STATUS } from "@/constants/transaction";
-import { Transaction, TransactionStatus } from "@/models/transaction.model";
-import { ComponentProps, FC, Fragment } from "react";
+import { COLORS, SPACING } from "@/constants/theme";
+import { Transaction } from "@/models/transaction.model";
+import { FC, Fragment } from "react";
 import { StyleSheet, View } from "react-native";
-import Icon from "../../Icon";
 import Divider from "@/components/Divider";
 import Body from "@/components/Body";
+import TransactionStatusBadge from "./TransactionStatusBadge";
 
 type TransactionDetailBodyProps = Transaction;
 
@@ -62,55 +61,6 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
     ],
   };
 
-  const renderStatusChip = (status: string) => {
-    const statusLabel = status as TransactionStatus;
-
-    const statusLabelStyle: Record<
-      TransactionStatus,
-      {
-        backgroundColor: string;
-        color: string;
-        icon: ComponentProps<typeof Icon>["name"];
-      }
-    > = {
-      [TRANSACTION_STATUS.COMPLETED]: {
-        backgroundColor: COLORS["background-positive"],
-        color: COLORS["content-positive"],
-        icon: "check",
-      },
-      [TRANSACTION_STATUS.PENDING]: {
-        backgroundColor: COLORS["background-warning"],
-        color: COLORS["content-warning"],
-        icon: "clock",
-      },
-      [TRANSACTION_STATUS.FAILED]: {
-        backgroundColor: COLORS["background-negative"],
-        color: COLORS["content-negative"],
-        icon: "close-circle-outline",
-      },
-    };
-
-    return (
-      <View
-        style={[
-          styles.statusChip,
-          {
-            backgroundColor: statusLabelStyle[statusLabel].backgroundColor,
-          },
-        ]}
-      >
-        <Icon
-          name={statusLabelStyle[statusLabel].icon}
-          size={16}
-          color={statusLabelStyle[statusLabel].color}
-        />
-        <Body style={{ color: statusLabelStyle[statusLabel].color }}>
-          {status.toUpperCase()}
-        </Body>
-      </View>
-    );
-  };
-
   const renderTransactionDetailRow = (item: {
     title: string;
     value: string;
@@ -118,7 +68,7 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
     <View style={styles.row} key={item.title}>
       <Body style={styles.title}>{item.title.toUpperCase()}</Body>
       {item.title === "Status" ? (
-        renderStatusChip(item.value)
+        <TransactionStatusBadge status={status} />
       ) : (
         <Body style={styles.value}>{item.value}</Body>
       )}
@@ -160,16 +110,6 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 16,
-  },
-  statusChip: {
-    paddingHorizontal: SPACING.S_1,
-    paddingVertical: SPACING.S_0,
-    borderRadius: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: SPACING.S_1,
-    fontSize: 14,
-    fontWeight: FONT_WEIGHT.MEDIUM,
   },
 });
 
