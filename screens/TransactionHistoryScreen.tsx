@@ -2,12 +2,12 @@ import IconButton from "@/components/IconButton";
 import TransactionList from "@/components/transaction/list/TransactionList";
 import TransactionListLoadingSkeleton from "@/components/transaction/list/TransactionListLoadingSkeleton";
 import TransactionErrorState from "@/components/transaction/TransactionErrorState";
-import { COLORS } from "@/constants/theme";
+import { COLORS, SPACING } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
 import useTransactionHistoriesQuery from "@/hooks/useTransactionHistoriesQuery";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const TransactionHistoryScreen = () => {
   const { onBiometricAuthenticate } = useAuthContext();
@@ -50,18 +50,17 @@ const TransactionHistoryScreen = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <View style={{ width: 24, height: 24 }}>
+            <View style={styles.headerAction}>
               <IconButton
                 onPress={onToggleMask}
                 name={isAmountMasked ? "eye" : "eye-off"}
-                size={24}
-                color={COLORS["text-white"]}
+                size={20}
+                color={COLORS["primary"]}
               />
             </View>
           ),
         }}
       />
-
       <TransactionList
         transactions={data}
         isAmountMasked={isAmountMasked}
@@ -71,5 +70,13 @@ const TransactionHistoryScreen = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  headerAction: {
+    width: 20,
+    height: 20,
+    marginRight: SPACING.S_0,
+  },
+});
 
 export default TransactionHistoryScreen;

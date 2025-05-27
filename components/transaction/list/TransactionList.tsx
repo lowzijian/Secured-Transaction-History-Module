@@ -1,23 +1,24 @@
 import { COLORS, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
 import {
-    formatTransactionAmount,
-    groupedTransactionByMonth,
-    maskTransactionAmount,
+  formatTransactionAmount,
+  groupedTransactionByMonth,
+  maskTransactionAmount,
 } from "@/utils/transaction.utils";
 import { ArrayElement } from "@/utils/types";
 import { FC } from "react";
 import {
-    RefreshControl,
-    SectionList,
-    SectionListProps,
-    StyleProp,
-    StyleSheet,
-    Text,
-    TextStyle,
-    View,
+  RefreshControl,
+  SectionList,
+  SectionListProps,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
 } from "react-native";
 import TransactionItem from "./TransactionItem";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface TransactionListProps {
   transactions: Transaction[];
@@ -34,6 +35,8 @@ type TransactionListSectionProps = SectionListProps<
 const TransactionList: FC<TransactionListProps> = (props) => {
   const { transactions, isAmountMasked, onPullToRefresh, isRefreshing } = props;
 
+  const { bottom } = useSafeAreaInsets();
+
   const groupedTransaction = groupedTransactionByMonth(transactions);
 
   const renderSectionHeader: TransactionListSectionProps["renderSectionHeader"] =
@@ -49,6 +52,7 @@ const TransactionList: FC<TransactionListProps> = (props) => {
     ({ section: { total } }) => {
       const totalAmountStyle: StyleProp<TextStyle> = {
         color: total > 0 ? COLORS["content-positive"] : COLORS["text-primary"],
+        fontSize: 16
       };
 
       return (
@@ -73,32 +77,42 @@ const TransactionList: FC<TransactionListProps> = (props) => {
       renderSectionHeader={renderSectionHeader}
       renderSectionFooter={renderSectionFooter}
       keyExtractor={keyExtractor}
-      contentContainerStyle={styles.contentContainer}
+      contentContainerStyle={[
+        styles.contentContainer,
+        { paddingBottom: bottom },
+      ]}
       refreshControl={
         <RefreshControl onRefresh={onPullToRefresh} refreshing={isRefreshing} />
       }
       stickySectionHeadersEnabled={false}
+      style={styles.container}
     />
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS["background-white"],
+  },
   contentContainer: {
-    paddingVertical: SPACING.S_3,
+    paddingTop: SPACING.S_2,
     paddingHorizontal: SPACING.S_2,
   },
   label: {
-    fontSize: 18,
+    fontSize: 14,
     color: COLORS["content-secondary"],
   },
   footer: {
     flexDirection: "row",
-    gap: SPACING.S_1,
+    gap: SPACING.S_2,
     marginLeft: "auto",
     marginBottom: SPACING.S_1,
+    alignContent: "center",
   },
   caption: {
     color: COLORS["content-secondary"],
+    fontSize: 14,
   },
 });
 

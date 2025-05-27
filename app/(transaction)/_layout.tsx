@@ -2,7 +2,7 @@ import IconButton from "@/components/IconButton";
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import useAuthContext from "@/hooks/useAuthContext";
 import { Redirect, Stack } from "expo-router";
-import { View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function ProtectedLayout() {
   const { isLoggedIn, isReady, onSignOut } = useAuthContext();
@@ -29,17 +29,20 @@ export default function ProtectedLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Transaction History",
+          title: "Transactions History",
           headerLeft: () => (
-            <View style={{ width: 24, height: 24, marginRight: SPACING.S_1 }}>
+            <View style={styles.headerAction}>
               <IconButton
                 onPress={onSignOut}
-                name="logout-variant"
-                size={24}
-                color={COLORS["text-white"]}
+                name="arrow-left"
+                size={20}
+                color={COLORS["primary"]}
               />
             </View>
           ),
+          headerStyle: styles.header,
+          headerTitleAlign: "center",
+          headerTitleStyle: styles.headerTitle,
         }}
       />
       <Stack.Screen
@@ -52,3 +55,19 @@ export default function ProtectedLayout() {
     </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  headerAction: {
+    width: 20,
+    height: 20,
+  },
+  header: {
+    backgroundColor: COLORS["background-white"],
+  },
+  headerTitle: {
+    fontWeight: FONT_WEIGHT.REGULAR,
+    fontSize: 16,
+    color: COLORS["primary"],
+    textAlign: "center",
+  },
+});

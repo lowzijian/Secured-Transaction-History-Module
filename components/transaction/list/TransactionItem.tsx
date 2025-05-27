@@ -1,21 +1,24 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
 import {
-    formatTransactionAmount,
-    formatTransactionDate,
-    maskTransactionAmount,
+  formatTransactionAmount,
+  formatTransactionDate,
+  maskTransactionAmount,
 } from "@/utils/transaction.utils";
 import { Link } from "expo-router";
 import { FC } from "react";
 import {
-    StyleProp,
-    StyleSheet,
-    Text,
-    TextStyle,
-    TouchableOpacity,
-    View,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import TransactionCategoryIcon from "../TransactionCategoryIcon";
+import { DATE_FORMAT } from "@/utils/date.util";
+import Icon from "@/components/Icon";
+import { TRANSACTION_TYPE } from "@/constants/transaction";
 
 interface TransactionItemProps extends Transaction {
   isAmountMasked?: boolean;
@@ -47,9 +50,27 @@ const TransactionItem: FC<TransactionItemProps> = (props) => {
         <TransactionCategoryIcon category={category} />
         <View style={styles.content}>
           <Text style={styles.description}>{description}</Text>
-          <Text style={styles.caption}>
-            {formatTransactionDate(date)} | {type.toUpperCase()}
-          </Text>
+          <View style={styles.detailRow}>
+            <Icon
+              name={"calendar-outline"}
+              size={14}
+              color={COLORS["content-secondary"]}
+            />
+            <Text style={styles.caption}>
+              {formatTransactionDate(date, DATE_FORMAT.SHORT_MONTH_DAY)}
+            </Text>
+            <Text style={styles.caption}>•</Text>
+            <Icon
+              name={
+                type === TRANSACTION_TYPE.CREDIT
+                  ? "credit-card-outline"
+                  : "wallet-outline"
+              }
+              size={14}
+              color={COLORS["content-secondary"]}
+            />
+            <Text style={styles.caption}>{type.toUpperCase()}</Text>
+          </View>
         </View>
         <Text style={amountStyle}>
           {isAmountMasked
@@ -66,20 +87,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: SPACING.S_2,
     paddingVertical: SPACING.S_2,
+    alignItems: "center",
   },
   content: {
     flexGrow: 1,
   },
   description: {
     fontWeight: FONT_WEIGHT.MEDIUM,
-    fontSize: 16,
+    fontSize: 14,
+  },
+  detailRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.S_0,
+    paddingTop: SPACING.S_0,
   },
   caption: {
-    fontSize: 14,
+    fontSize: 12,
     color: COLORS["content-secondary"],
   },
   amount: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FONT_WEIGHT.SEMIBOLD,
   },
 });
