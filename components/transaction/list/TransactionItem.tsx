@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   amount: {
     fontSize: 14,
-    fontWeight: FONT_WEIGHT.SEMIBOLD,
+    fontWeight: FONT_WEIGHT.MEDIUM,
   },
 });
 
