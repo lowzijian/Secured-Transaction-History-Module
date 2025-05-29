@@ -1,4 +1,4 @@
-import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
+import { COLORS, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
 import { FC } from "react";
 import { Image, StyleSheet, View } from "react-native";
