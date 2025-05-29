@@ -4,7 +4,8 @@ import { FC, Fragment } from "react";
 import { StyleSheet, View } from "react-native";
 import Divider from "@/components/Divider";
 import Body from "@/components/Body";
-import TransactionStatusBadge from "./TransactionStatusBadge";
+import { formatTransactionDate } from "@/utils/transaction.utils";
+import { DATE_FORMAT } from "@/utils/date.util";
 
 type TransactionDetailBodyProps = Transaction;
 
@@ -16,8 +17,8 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
     accountNumber,
     merchant,
     referenceId,
-    status,
     category,
+    date,
   } = props;
 
   const groupedTransactionDetails = {
@@ -27,8 +28,11 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
         value: description,
       },
       {
-        title: "Status",
-        value: status,
+        title: "Date",
+        value: formatTransactionDate(
+          date,
+          DATE_FORMAT.SHORT_MONTH_DAY_COMMA_STANDARD_CLOCK_MERIDIEM
+        ),
       },
     ],
     account: [
@@ -67,11 +71,7 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
   }) => (
     <View style={styles.row} key={item.title}>
       <Body style={styles.title}>{item.title.toUpperCase()}</Body>
-      {item.title === "Status" ? (
-        <TransactionStatusBadge status={status} />
-      ) : (
-        <Body>{item.value}</Body>
-      )}
+      <Body>{item.value}</Body>
     </View>
   );
 

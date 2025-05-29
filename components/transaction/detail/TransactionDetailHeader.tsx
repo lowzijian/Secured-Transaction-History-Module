@@ -1,23 +1,24 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import { TransactionCategory } from "@/models/transaction.model";
 import {
-    formatTransactionAmount,
-    formatTransactionDate,
-} from "@/utils/transaction.utils";
+  TransactionCategory,
+  TransactionStatus,
+} from "@/models/transaction.model";
+import { formatTransactionAmount } from "@/utils/transaction.utils";
 import { FC } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import TransactionCategoryIcon from "../TransactionCategoryIcon";
 import Body from "@/components/Body";
+import TransactionStatusBadge from "./TransactionStatusBadge";
 
 interface TransactionDetailHeaderProps {
   amount: number;
-  date: string;
+  status: TransactionStatus;
   category: TransactionCategory;
   merchantLogo?: string;
 }
 
 const TransactionDetailHeader: FC<TransactionDetailHeaderProps> = (props) => {
-  const { amount, date, category, merchantLogo } = props;
+  const { amount, category, merchantLogo, status } = props;
 
   return (
     <View style={styles.container}>
@@ -29,8 +30,10 @@ const TransactionDetailHeader: FC<TransactionDetailHeaderProps> = (props) => {
           </View>
         )}
       </View>
-      <Body style={styles.header}>{formatTransactionAmount(amount)}</Body>
-      <Body style={styles.caption}>{formatTransactionDate(date)}</Body>
+      <Body style={styles.header}>{`${
+        amount > 0 ? "+" : "-"
+      }${formatTransactionAmount(amount)}`}</Body>
+      <TransactionStatusBadge status={status} />
     </View>
   );
 };
@@ -65,12 +68,9 @@ const styles = StyleSheet.create({
     objectFit: "contain",
   },
   header: {
-    fontSize: 32,
-    fontWeight: FONT_WEIGHT.BOLD,
-  },
-  caption: {
-    fontSize: 16,
-    color: COLORS["content-secondary"],
+    fontSize: 30,
+    fontWeight: FONT_WEIGHT.SEMIBOLD,
+    marginBottom: SPACING.S_1,
   },
 });
 

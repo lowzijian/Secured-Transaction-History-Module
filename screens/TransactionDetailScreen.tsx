@@ -38,7 +38,7 @@ const TransactionDetailScreen = () => {
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <TransactionDetailHeader
         amount={transaction.amount}
-        date={transaction.date}
+        status={transaction.status}
         category={transaction.category}
         merchantLogo={transaction.merchantLogo}
       />
