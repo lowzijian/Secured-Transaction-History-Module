@@ -6,12 +6,15 @@ import useAuthContext from "@/hooks/useAuthContext";
 import LoginButton from "@/components/auth/GetStartedButton";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Body from "@/components/Body";
+import useAuthBiometricSupport from "@/hooks/useAuthBiometricSupport";
 
 const LOGO_SIZE = 40;
 
 const LoginScreen = () => {
   const { onSignIn } = useAuthContext();
   const { bottom } = useSafeAreaInsets();
+
+  useAuthBiometricSupport();
 
   const renderContent = () => (
     <View>
