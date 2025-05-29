@@ -4,7 +4,7 @@ A Secure & User Friendly React Native app built with [Expo](https://expo.dev) th
 
 ## ✨ Features
 - 🔐 Simple authentication system that allow users to login using device biometric (Face ID / Fingerprint)
-- 📄 Transaction List Screen with pull-to-refresh to stimulate data reload, sensive information like amount is masked by default and to be revealed by device biometric authorization
+- 📄 Transaction List Screen with pull-to-refresh to stimulate data reload, sensitive information like amount is masked by default and to be revealed by device biometric authorization
 - 📌 Transaction Detail Screen with full info
 - ⚙️ Error Handling for auth, network, and UI
 - 💅 Built with clean architecture and modular components
@@ -206,35 +206,37 @@ _Make sure your simulator or device supports biometric authentication._
 
 ## Screenshots
 
-<table>
-   <thead>
-      <tr>
-         <td>Login screen</td>
-         <td>Transaction History Screen</td>
-         <td>Transaction Detail Screen</td>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>
-            <img width="320" alt="Screenshot 2025-05-13 at 9 45 28 PM" src="https://github.com/user-attachments/assets/880b7474-9844-4ce8-8b06-d83545354ebb" />
-         </td>
-           <td>
-            <img width="320" alt="Screenshot 2025-05-13 at 9 45 28 PM" src="https://github.com/user-attachments/assets/6bc8bf2c-e333-4225-b0c2-78f295734d92" />
-         </td>   
-           <td>
-            <img width="320" alt="Screenshot 2025-05-13 at 9 45 28 PM" src="https://github.com/user-attachments/assets/8a11f0db-0cae-421f-97dc-8b53fc5f74ce" />
-         </td>   
-      </tr>
-   </tbody>
-</table>
+| Login Screen                                                                                                                                          | History Screen                                                                                                                                | Detail Screen                                                                                                                                 |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| ![Simulator Screenshot - iPhone 15 Pro Max - 2025-05-29 at 13 21 30](https://github.com/user-attachments/assets/2d3b09ce-99e2-4061-9109-57285f8266bb) | ![simulator_screenshot_C97A3EC2-3833-4890-B532-E24EC6EA300D](https://github.com/user-attachments/assets/3e42a572-7c23-48a7-a3b1-b85068742e36) | ![simulator_screenshot_4414809A-FE82-4B4D-8C66-67F76FDC57C0](https://github.com/user-attachments/assets/cc6b804a-b1db-4c03-8a62-14bbb417a2ca) |
 
-👷  TBD Screenshots & Demo
+| History Loading Skeleton                                                                                                                              | Detail Loading Skeleton                                                                                                                               | Generic Error Screeen                                                                                                                                 |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![Simulator Screenshot - iPhone 15 Pro Max - 2025-05-29 at 13 29 22](https://github.com/user-attachments/assets/258fe8d9-9459-4ced-9bde-b5243703c02a) | ![Simulator Screenshot - iPhone 15 Pro Max - 2025-05-29 at 13 29 10](https://github.com/user-attachments/assets/4ec43835-cbb2-45b7-8859-e1d7118ef477) | ![Simulator Screenshot - iPhone 15 Pro Max - 2025-05-29 at 13 30 51](https://github.com/user-attachments/assets/8374a503-2236-4aa6-b480-e28b803a9752) |
+
+
+ 
+**Login Via Biometric e.g Finger Print / PIN**
+
+ 
+https://github.com/user-attachments/assets/b15bc3e9-f366-4a26-99ee-8e7a6bf346c3
+ 
+
+**View sensitive information Via Biometric e.g Finger Print / PIN**
+
+
+https://github.com/user-attachments/assets/b9563b6c-cf06-4cd9-9767-0b4bc0a2ae68
+
+
+**Pull to refresh to stimulate data reloading**
+
+
+https://github.com/user-attachments/assets/05e881f6-956a-415e-8742-f56f6186e1fd
+
+
+
 
 ## What Next's
-
- **WIP**
-- 👷  Loading Skeleton
 
 #### Error Handling
 - [ ] Authentication Error Handling
@@ -249,11 +251,12 @@ _Make sure your simulator or device supports biometric authentication._
 #### Animation Ideas
 - Layout animation for transaction list in history screen ( Refer: [here](https://docs.swmansion.com/react-native-reanimated/docs/layout-animations/entering-exiting-animations) )
 - Custom Pull to refresh ( Refer: [here](https://blog.cloudboost.io/building-a-custom-refresh-animation-in-react-native-using-reanimated-9b64212a0366) )
+- Animated Shimmer Loading Skeleton
 
 #### Feature Ideas
 - Smart Filter
-- Idle auto-loggedout warning popbox
 - Custom Icon
+- Share Transaction Detail Button
 
 
 ## 🖌️ Design Inspiration
