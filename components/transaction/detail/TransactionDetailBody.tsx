@@ -1,92 +1,83 @@
-import { COLORS, SPACING } from "@/constants/theme";
+import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
 import { Transaction } from "@/models/transaction.model";
-import { FC, Fragment } from "react";
-import { StyleSheet, View } from "react-native";
-import Divider from "@/components/Divider";
+import { FC } from "react";
+import { Image, StyleSheet, View } from "react-native";
 import Body from "@/components/Body";
 import { formatTransactionDate } from "@/utils/transaction.utils";
 import { DATE_FORMAT } from "@/utils/date.util";
+import TransactionDetailCard from "./TransactionDetailCard";
 
 type TransactionDetailBodyProps = Transaction;
 
 const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
   const {
     description,
-    type,
     accountName,
     accountNumber,
     merchant,
+    merchantLogo,
     referenceId,
     category,
     date,
   } = props;
 
-  const groupedTransactionDetails = {
-    general: [
-      {
-        title: "Description",
-        value: description,
-      },
-      {
-        title: "Date",
-        value: formatTransactionDate(
-          date,
-          DATE_FORMAT.SHORT_MONTH_DAY_COMMA_STANDARD_CLOCK_MERIDIEM
-        ),
-      },
-    ],
-    account: [
-      {
-        title: "Account Number",
-        value: accountNumber,
-      },
-      {
-        title: "Account Name",
-        value: accountName,
-      },
-      {
-        title: "Card Type",
-        value: type,
-      },
-    ],
-    merchant: [
-      {
-        title: "Merchant",
-        value: merchant,
-      },
-      {
-        title: "Category",
-        value: category,
-      },
-      {
-        title: "Reference ID",
-        value: referenceId,
-      },
-    ],
-  };
-
-  const renderTransactionDetailRow = (item: {
-    title: string;
-    value: string;
-  }) => (
-    <View style={styles.row} key={item.title}>
-      <Body style={styles.title}>{item.title.toUpperCase()}</Body>
-      <Body>{item.value}</Body>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
-      {Object.entries(groupedTransactionDetails).map(([group, rows], index) => (
-        <Fragment key={group}>
-          <View style={styles.group}>
-            {rows.map(renderTransactionDetailRow)}
-          </View>
-          {index < Object.keys(groupedTransactionDetails).length - 1 && (
-            <Divider />
-          )}
-        </Fragment>
-      ))}
+      <TransactionDetailCard
+        data={[
+          {
+            label: "Description",
+            value: description,
+          },
+          {
+            label: "Date",
+            value: formatTransactionDate(
+              date,
+              DATE_FORMAT.SHORT_MONTH_DAY_COMMA_STANDARD_CLOCK_MERIDIEM
+            ),
+          },
+          {
+            label: "Category",
+            value: category,
+          },
+        ]}
+      />
+      <TransactionDetailCard
+        data={[
+          {
+            label: "Account Number",
+            value: accountNumber,
+          },
+          {
+            label: "Account Name",
+            value: accountName,
+          },
+        ]}
+      />
+      <TransactionDetailCard
+        data={[
+          {
+            label: "Reference ID",
+            value: referenceId,
+          },
+          {
+            label: "Merchant",
+            value: merchant,
+            render: () => (
+              <View style={styles.chip}>
+                {merchantLogo && (
+                  <Image
+                    source={{ uri: merchantLogo }}
+                    style={styles.merchantLogo}
+                    resizeMode="contain"
+                  />
+                )}
+                <Body>{merchant}</Body>
+              </View>
+            ),
+          },
+        ]}
+      />
     </View>
   );
 };
@@ -94,19 +85,20 @@ const TransactionDetailBody: FC<TransactionDetailBodyProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: SPACING.S_2,
-    paddingHorizontal: SPACING.S_3,
-    gap: SPACING.S_3,
-  },
-  group: {
     gap: SPACING.S_2,
   },
-  row: {
+  chip: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
+    gap: SPACING.S_1,
+    backgroundColor: COLORS["background-tertiary"],
+    padding: SPACING.S_0,
+    borderRadius: 6,
   },
-  title: {
-    color: COLORS["content-secondary"],
+  merchantLogo: {
+    width: 24,
+    height: 24,
+    borderRadius: 8,
   },
 });
 

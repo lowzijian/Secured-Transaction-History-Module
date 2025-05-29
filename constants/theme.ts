@@ -28,6 +28,7 @@ export const COLORS = {
   "background-negative": "#FEE2E2",
   "background-warning": "#FEF3C7",
   "background-secondary": "#F3F4F6",
+  "background-tertiary": "#F9FAFB",
   "border-primary": "#A9A9A9",
   "background-primary": "#E0F0FF",
   "background-white": "#FFFFFF",
