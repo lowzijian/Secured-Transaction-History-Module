@@ -10,12 +10,17 @@ const AuthService = {
   },
 
   async authenticate(): Promise<boolean> {
-    const result = await LocalAuthentication.authenticateAsync({
-      promptMessage: "Authenticate",
-      fallbackLabel: "Use Passcode",
-      cancelLabel: "Cancel",
-    });
-    return result.success;
+    try {
+      const result = await LocalAuthentication.authenticateAsync({
+        promptMessage: "Authenticate",
+        fallbackLabel: "Use Passcode",
+        cancelLabel: "Cancel",
+      });
+      return result.success;
+    } catch (error) {
+      console.log("Authentication error:", error);
+      return false;
+    }
   },
 
   async getSupportedBiometricTypes(): Promise<

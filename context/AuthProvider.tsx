@@ -3,6 +3,7 @@ import authService from "@/services/auth.service";
 import AuthContext from "./AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
+import { Alert } from "react-native";
 
 const AUTH_STORAGE_KEY = "auth-storage-key";
 
@@ -25,7 +26,10 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const onSignIn = async () => {
     const success = await onBiometricAuthenticate();
     if (!success) {
-      console.error("Authentication failed");
+      Alert.alert(
+        "Authentication Error",
+        "An error occurred while trying to authenticate. Please try again."
+      );
       return;
     }
     setIsLoggedIn(success);
