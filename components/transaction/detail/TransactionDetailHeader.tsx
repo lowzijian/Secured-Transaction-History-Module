@@ -1,39 +1,52 @@
 import { COLORS, FONT_WEIGHT, SPACING } from "@/constants/theme";
-import {
-  TransactionCategory,
-  TransactionStatus,
-} from "@/models/transaction.model";
+import { TransactionStatus, TransactionType } from "@/models/transaction.model";
 import { formatTransactionAmount } from "@/utils/transaction.utils";
 import { FC } from "react";
-import { Image, StyleSheet, View } from "react-native";
-import TransactionCategoryIcon from "../TransactionCategoryIcon";
+import { StyleSheet, View } from "react-native";
 import Body from "@/components/Body";
 import TransactionStatusBadge from "./TransactionStatusBadge";
+import TransactionCardTypeBadge from "./TransactionCardTypeBadge";
+import Icon from "@/components/Icon";
 
 interface TransactionDetailHeaderProps {
   amount: number;
   status: TransactionStatus;
-  category: TransactionCategory;
-  merchantLogo?: string;
+  type: TransactionType;
 }
 
 const TransactionDetailHeader: FC<TransactionDetailHeaderProps> = (props) => {
-  const { amount, category, merchantLogo, status } = props;
+  const { amount, status, type } = props;
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <TransactionCategoryIcon category={category} size={80} />
-        {merchantLogo && (
-          <View style={styles.merchantIconContainer}>
-            <Image source={{ uri: merchantLogo }} style={styles.merchantIcon} />
-          </View>
-        )}
+      <View
+        style={[
+          styles.iconContainer,
+          {
+            backgroundColor:
+              amount > 0
+                ? COLORS["content-positive"]
+                : COLORS["content-negative"],
+            borderColor:
+              amount > 0
+                ? COLORS["background-positive"]
+                : COLORS["background-negative"],
+          },
+        ]}
+      >
+        <Icon
+          name={amount > 0 ? "arrow-down" : "arrow-up"}
+          size={30}
+          color={COLORS["text-white"]}
+        />
       </View>
       <Body style={styles.header}>{`${
-        amount > 0 ? "+" : "-"
+        amount < 0 ? "-" : ""
       }${formatTransactionAmount(amount)}`}</Body>
-      <TransactionStatusBadge status={status} />
+      <View style={styles.detailContainer}>
+        <TransactionStatusBadge status={status} />
+        <TransactionCardTypeBadge type={type} />
+      </View>
     </View>
   );
 };
@@ -45,32 +58,24 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.S_4,
   },
   iconContainer: {
+    height: 80,
+    width: 80,
+    borderRadius: 40,
     marginBottom: SPACING.S_2,
-  },
-  merchantIconContainer: {
-    width: 30,
-    height: 30,
-    borderRadius: 20,
-    backgroundColor: COLORS["background-white"],
-    borderColor: COLORS["primary"],
-    borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    right: -5,
-    bottom: -5,
-    zIndex: 1,
-    shadowColor: "#000",
-  },
-  merchantIcon: {
-    width: 18,
-    height: 18,
-    objectFit: "contain",
+    borderWidth: 5,
+    borderStyle: "solid",
   },
   header: {
     fontSize: 30,
     fontWeight: FONT_WEIGHT.SEMIBOLD,
     marginBottom: SPACING.S_1,
+  },
+  detailContainer: {
+    flexDirection: "row",
+    gap: SPACING.S_1,
+    alignItems: "center",
   },
 });
 
